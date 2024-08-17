@@ -1,0 +1,12 @@
+<div class="dropdown-menu">
+  <div class="title">{{ data.title | uppercase }}</div>
+  <nav>
+    <ul>
+      @for (item of data.links; track $index) {
+      <li>
+        <a [routerLink]="[item.url]" class="link">{{ item.name }}</a>
+      </li>
+      }
+    </ul>
+  </nav>
+</div>

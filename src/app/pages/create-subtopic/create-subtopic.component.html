@@ -1,0 +1,77 @@
+<div class="create-container">
+  <div class="component">
+    <input class="searchbox" type="text" placeholder="search subject" />
+  </div>
+  <form
+    class="component"
+    action=""
+    class="component form-flex"
+    [formGroup]="form"
+    (ngSubmit)="save()"
+  >
+    <div class="control">
+      <!-- <label for="subject">subject</label> -->
+      <select
+        type="text"
+        id="subject"
+        name="subject"
+        formControlName="subject"
+        (change)="selectTopics($event)"
+      >
+        <option value="" selected disabled>select subject</option>
+        @for (item of subjects; track $index) {
+        <option [value]="item.name">{{ item.name }}</option>
+        }
+      </select>
+    </div>
+    <div class="control">
+      <!-- <label for="subject">subject</label> -->
+      <select type="text" id="topic" name="topic" formControlName="topic">
+        <option value="" selected disabled>select topic</option>
+        @for (item of filteredTopics; track $index) {
+        <option [value]="item.name">{{ item.name }}</option>
+        }
+      </select>
+    </div>
+    <div class="control">
+      <!-- <label for="subject">subject</label> -->
+      <input
+        type="text"
+        id="subtopic"
+        name="subtopic"
+        placeholder="enter subtopic"
+        autocomplete="off"
+        formControlName="subtopic"
+      />
+    </div>
+    <div class="control">
+      <!-- <label class="label-hidden" for="subject">subject</label> -->
+      <button class="btn" type="submit " [disabled]="!form.valid">SAVE</button>
+    </div>
+  </form>
+  <div class="component">
+    <div class="created-heading">CREATED ITEMS</div>
+    @if(items.length>0){
+    <table>
+      <thead>
+        <tr>
+          <th>sn</th>
+          <th>id</th>
+          <th>topic</th>
+          <th>delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of items; track $index) {
+        <tr>
+          <td>{{ $index + 1 }}</td>
+          <td>{{ item._id }}</td>
+          <td>{{ item.name }}</td>
+          <td><button class="btn-round btn--danger">delete</button></td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    }
+  </div>
+</div>

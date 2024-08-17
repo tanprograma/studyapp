@@ -1,0 +1,12 @@
+@if(open){
+<div class="main-menu">
+  <div class="header">
+    <button class="link close-btn" (click)="toggleMenu()">
+      <fa-icon [icon]="arrowLeft"></fa-icon>
+    </button>
+  </div>
+  <div class="main">
+    <app-dropdown-menu [data]="createLinks"></app-dropdown-menu>
+  </div>
+</div>
+}

@@ -1,0 +1,88 @@
+.create-container {
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+}
+.create-container::-webkit-scrollbar {
+  display: none;
+}
+
+hr {
+  color: black;
+}
+.form-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.control {
+  margin-right: 5px;
+}
+label,
+input {
+  display: block;
+}
+input,
+select,
+.btn {
+  height: 2rem;
+  min-width: 8rem;
+  border-radius: 5px;
+}
+label {
+  margin-bottom: 5px;
+}
+.label-hidden {
+  opacity: 0;
+}
+input {
+  border: 0;
+}
+input::placeholder {
+  text-align: center;
+}
+.btn:hover {
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+}
+.btn:disabled {
+  cursor: not-allowed;
+}
+// searchbox
+.searchbox {
+  width: 100%;
+  padding: 5px;
+  border: 0;
+}
+textarea {
+  display: block;
+  width: 80%;
+  margin: 10px auto;
+  min-height: 4rem;
+  border: 0;
+  border-radius: 5px;
+  padding: 10px;
+}
+.created-heading {
+  text-align: center;
+  margin: 5px;
+  padding: 5px;
+  border-bottom: 1px solid black;
+}
+table {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  margin-right: auto;
+  margin-left: auto;
+}
+th,
+td {
+  padding: 5px;
+  text-align: left;
+}
+th:not(:first-child),
+td:not(:first-child) {
+  min-width: 8rem;
+}
