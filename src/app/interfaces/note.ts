@@ -4,4 +4,6 @@ export interface Note {
   topicID: string;
   subjectID: string;
   _id?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

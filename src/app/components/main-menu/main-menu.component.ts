@@ -55,6 +55,10 @@ export class MainMenuComponent {
         name: 'quote',
         url: '/create-quotes',
       },
+      {
+        name: 'todo',
+        url: '/create-todos',
+      },
     ],
   };
 }

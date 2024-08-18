@@ -4,4 +4,6 @@ export interface Question {
   topicID: string;
   subjectID: string;
   _id?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

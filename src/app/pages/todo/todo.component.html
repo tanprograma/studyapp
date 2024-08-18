@@ -1,0 +1,18 @@
+<div class="create-container page">
+  <div class="component flex-center page__heading">TODOS</div>
+  <div class="component">
+    <input class="searchbox" type="date" (keyup)="search($event)" />
+  </div>
+  @if(items.length>0){
+  <div class="component flex-center">TODOS({{ items.length }})</div>
+  <div class="component">
+    <!-- fetched notes will display -->
+
+    <ul>
+      @for (item of items; track $index) {
+      <li>{{ item.value }}</li>
+      }
+    </ul>
+  </div>
+  }
+</div>

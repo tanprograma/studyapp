@@ -10,9 +10,11 @@ import { QuestionsComponent } from './pages/questions/questions.component';
 import { QuotesComponent } from './pages/quotes/quotes.component';
 import { CreateTopicComponent } from './pages/create-topic/create-topic.component';
 import { CreateSubtopicComponent } from './pages/create-subtopic/create-subtopic.component';
+import { TodoComponent } from './pages/todo/todo.component';
+import { CreateTodoComponent } from './pages/create-todo/create-todo.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/questions', pathMatch: 'full' },
+  { path: '', pathMatch: 'full', redirectTo: '/todos' },
   {
     path: '',
     component: MainComponent,
@@ -20,6 +22,8 @@ export const routes: Routes = [
       { path: 'notes', component: NotesPageComponent },
       { path: 'quotes', component: QuotesComponent },
       { path: 'questions', component: QuestionsComponent },
+      { path: 'todos', component: TodoComponent },
+      { path: 'create-todos', component: CreateTodoComponent },
       { path: 'create-quotes', component: CreateQuotesComponent },
       { path: 'create-notes', component: CreateNotesComponent },
       { path: 'create-questions', component: CreateQuestionsComponent },

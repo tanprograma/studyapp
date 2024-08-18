@@ -20,6 +20,7 @@ export class UrlService {
   NOTE_API = `${this.BASE_URL}/api/notes`;
   QUESTION_API = `${this.BASE_URL}/api/questions`;
   QUOTE_API = `${this.BASE_URL}/api/quotes`;
+  TODO_API = `${this.BASE_URL}/api/todos`;
 
   constructor() {}
 }
