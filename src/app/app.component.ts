@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   document = inject(DOCUMENT);
   storeService = inject(UrlService);
   // route=inject(ActivatedRoute)
-  title = 'studyapp';
+  title = 'KISOMO';
   ngOnInit(): void {
     // this.setAPI_URL();
   }
