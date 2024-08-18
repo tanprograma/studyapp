@@ -5,7 +5,7 @@
       class="searchbox"
       type="text"
       placeholder="search author"
-      (change)="search($event)"
+      (keyup)="search($event)"
     />
   </div>
   @if(items().length>0){
