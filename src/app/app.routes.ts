@@ -12,7 +12,7 @@ import { CreateTopicComponent } from './pages/create-topic/create-topic.componen
 import { CreateSubtopicComponent } from './pages/create-subtopic/create-subtopic.component';
 
 export const routes: Routes = [
-  //   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/questions', pathMatch: 'full' },
   {
     path: '',
     component: MainComponent,
