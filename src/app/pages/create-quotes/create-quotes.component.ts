@@ -31,6 +31,7 @@ export class CreateQuotesComponent {
       })
       .subscribe((result) => {
         this.items.push(result);
+        this.reset();
       });
   }
   reset() {
