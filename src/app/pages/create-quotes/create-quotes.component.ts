@@ -31,8 +31,8 @@ export class CreateQuotesComponent {
       })
       .subscribe((result) => {
         this.items.push(result);
-        this.reset();
       });
+    this.reset();
   }
   reset() {
     this.form.patchValue({
