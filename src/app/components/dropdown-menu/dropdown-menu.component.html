@@ -4,7 +4,12 @@
     <ul>
       @for (item of data.links; track $index) {
       <li>
-        <a [routerLink]="[item.url]" class="link">{{ item.name }}</a>
+        <a
+          [routerLink]="[item.url]"
+          class="link"
+          [class.selected]="item.url == document.location.pathname"
+          >{{ item.name }}</a
+        >
       </li>
       }
     </ul>

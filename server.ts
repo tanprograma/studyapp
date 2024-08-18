@@ -11,7 +11,8 @@ import notes from './api/routes/notes.mjs';
 import subtopics from './api/routes/subtopics.mjs';
 import topics from './api/routes/topics.mjs';
 import subjects from './api/routes/subjects.mjs';
-
+import questions from './api/routes/questions';
+import quotes from './api/routes/quotes';
 dotenv.config();
 
 // The Express app is exported so that it can be used by serverless Functions.
@@ -24,6 +25,8 @@ export function app(): express.Express {
   const commonEngine = new CommonEngine();
   server.use(express.json());
   server.use('/api/notes', notes);
+  server.use('/api/questions', questions);
+  server.use('/api/quotes', quotes);
   server.use('/api/topics', topics);
   server.use('/api/subtopics', subtopics);
   server.use('/api/subjects', subjects);

@@ -1,1 +1,74 @@
-<p>create-quotes works!</p>
+<div>
+  <div class="component flex-center">CREATE QUOTES</div>
+  <form
+    class="component"
+    action=""
+    class="component"
+    [formGroup]="form"
+    (ngSubmit)="save()"
+  >
+    <div class="form-flex">
+      <div class="control">
+        <!-- <label for="firstname">firstname</label> -->
+        <input
+          type="text"
+          id="firstname"
+          name="firstname"
+          formControlName="firstname"
+          placeholder="enter firstname"
+        />
+      </div>
+      <div class="control">
+        <!-- <label for="firstname">firstname</label> -->
+        <input
+          type="text"
+          id="lastname"
+          name="lastname"
+          formControlName="lastname"
+          placeholder="enter firstname"
+        />
+      </div>
+    </div>
+
+    <div class="control">
+      <!-- <label for="subject">subject</label> -->
+      <textarea
+        type="text"
+        id="quote"
+        name="quote"
+        placeholder="enter notes.."
+        autocomplete="off"
+        formControlName="quote"
+      ></textarea>
+    </div>
+    <div class="control form-flex">
+      <!-- <label class="label-hidden" for="subject">subject</label> -->
+      <button class="btn" type="submit " [disabled]="!form.valid">SAVE</button>
+    </div>
+  </form>
+  <div class="component">
+    <div class="created-heading">
+      CREATED ITEMS {{ items.length > 0 ? items.length : "" }}
+    </div>
+    @if(items.length>0){
+    <ul>
+      @for (item of items; track $index) {
+      <li>
+        <div class="note">
+          <div class="note__index">{{ $index + 1 }}</div>
+          <div class="note__action">
+            <button class="btn-round btn--danger">delete</button>
+          </div>
+          <div class="note__content">
+            {{ item.value }}
+          </div>
+        </div>
+      </li>
+      }
+    </ul>
+
+    <tbody></tbody>
+
+    }
+  </div>
+</div>

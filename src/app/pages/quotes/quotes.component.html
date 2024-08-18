@@ -1,1 +1,22 @@
-<p>quotes works!</p>
+<div class="create-container page">
+  <div class="component flex-center page__heading">QUOTES</div>
+  <div class="component">
+    <input
+      class="searchbox"
+      type="text"
+      placeholder="search author"
+      (change)="search($event)"
+    />
+  </div>
+  @if(items().length>0){
+  <div class="component">
+    <!-- fetched notes will display -->
+
+    <ul>
+      @for (item of items(); track $index) {
+      <li>&ldquo;{{ item.value }}&rdquo; -{{ item.author }}</li>
+      }
+    </ul>
+  </div>
+  }
+</div>

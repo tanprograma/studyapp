@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Link } from '../../interfaces/link';
 import { RouterLink } from '@angular/router';
-import { UpperCasePipe } from '@angular/common';
+import { DOCUMENT, UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-dropdown-menu',
@@ -12,4 +12,5 @@ import { UpperCasePipe } from '@angular/common';
 })
 export class DropdownMenuComponent {
   @Input() data!: { title: string; links: Link[] };
+  document = inject(DOCUMENT);
 }

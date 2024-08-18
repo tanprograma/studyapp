@@ -18,4 +18,9 @@ export class QuestionService {
     const url = `${this.urls.QUESTION_API}`;
     return this.http.get<Question[]>(url);
   }
+  getID(id: string) {
+    const url = `${this.urls.NOTE_API}/${id}`;
+
+    return this.http.get<Question[]>(url);
+  }
 }

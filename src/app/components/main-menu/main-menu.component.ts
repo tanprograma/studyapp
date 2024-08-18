@@ -1,8 +1,15 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
-import { DOCUMENT } from '@angular/common';
+
 @Component({
   selector: 'app-main-menu',
   standalone: true,
@@ -13,6 +20,7 @@ import { DOCUMENT } from '@angular/common';
 export class MainMenuComponent {
   @Output() onToggleMenu = new EventEmitter();
   @Input() open!: boolean;
+
   // menuIcon = faBars;
   // leftArrow = faArrowLeft;
   toggleMenu() {
@@ -38,6 +46,14 @@ export class MainMenuComponent {
       {
         name: 'note',
         url: '/create-notes',
+      },
+      {
+        name: 'question',
+        url: '/create-questions',
+      },
+      {
+        name: 'quote',
+        url: '/create-quotes',
       },
     ],
   };
