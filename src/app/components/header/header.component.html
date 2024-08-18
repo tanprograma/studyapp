@@ -6,13 +6,28 @@
         <button class="link link-margin" (click)="toggleMenu()">MENU</button>
       </li>
       <li>
-        <a class="link link-margin" routerLink="notes" href="">notes</a>
+        <a
+          class="link link-margin"
+          routerLink="notes"
+          [class.selected]="'/notes' == document.location.pathname"
+          >notes</a
+        >
       </li>
       <li>
-        <a class="link link-margin" routerLink="questions" href="">questions</a>
+        <a
+          class="link link-margin"
+          routerLink="questions"
+          [class.selected]="'/questions' == document.location.pathname"
+          >questions</a
+        >
       </li>
       <li>
-        <a class="link link-margin" routerLink="quotes" href="">quotes</a>
+        <a
+          class="link link-margin"
+          routerLink="quotes"
+          [class.selected]="'/quotes' == document.location.pathname"
+          >quotes</a
+        >
       </li>
     </ul>
   </nav>

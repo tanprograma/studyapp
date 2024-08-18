@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -10,8 +11,7 @@ import { RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
   @Output() onToggleMenu = new EventEmitter();
-  // menuIcon = faBars;
-  // leftArrow = faArrowLeft;
+  document = inject(DOCUMENT);
   toggleMenu() {
     this.onToggleMenu.emit();
   }
