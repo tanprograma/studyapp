@@ -8,5 +8,5 @@ const schema = new Schema<ITodo>(
   },
   { timestamps: true }
 );
-const mymodel = model<ITodo>('Subject', schema);
+const mymodel = model<ITodo>('Todo', schema);
 export default mymodel;
