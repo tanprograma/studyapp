@@ -20,21 +20,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class QuotesComponent implements OnInit {
   quoteService = inject(QuoteService);
   all_Items: Quote[] = [];
-  searchTerm = signal<string>('');
-  items!: Signal<Quote[]>;
+
+  items: Quote[] = [];
   ngOnInit(): void {
     this.quoteService.get().subscribe((res) => {
-      this.all_Items = res;
-      this.items = computed(() => {
-        if (this.searchTerm() == '') return this.all_Items;
-        return this.all_Items.filter((quote) =>
-          quote.author.includes(this.searchTerm().toLowerCase())
-        );
-      });
+      this.all_Items = this.items = res;
     });
   }
   search(e: Event) {
     const target = e.target as HTMLInputElement;
-    this.searchTerm.set(target.value);
+    if (target.value == '') {
+      this.items = this.all_Items;
+      return;
+    }
+    this.items = this.all_Items.filter((item) => {
+      return item.author.includes(target.value.toLowerCase());
+    });
   }
 }

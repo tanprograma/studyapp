@@ -8,12 +8,12 @@
       (keyup)="search($event)"
     />
   </div>
-  @if(items().length>0){
+  @if(items.length>0){
   <div class="component">
     <!-- fetched notes will display -->
 
     <ul>
-      @for (item of items(); track $index) {
+      @for (item of items; track $index) {
       <li>&ldquo;{{ item.value }}&rdquo; -{{ item.author }}</li>
       }
     </ul>
