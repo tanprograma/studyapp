@@ -55,10 +55,12 @@ export class QuestionsComponent {
       this.subjectService.get(),
       this.topicService.get(),
       this.subtopicService.get(),
-    ]).subscribe(([subjects, topics, subtopics]) => {
+      this.questionService.get(),
+    ]).subscribe(([subjects, topics, subtopics, questions]) => {
       this.subjects = subjects;
       this.topics = topics;
       this.subtopics = subtopics;
+      this.items = questions;
     });
   }
 
