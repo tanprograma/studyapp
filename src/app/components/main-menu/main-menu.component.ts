@@ -28,8 +28,8 @@ export class MainMenuComponent {
   }
   // document=inject(DOCUMENT)
   arrowLeft = faArrowLeft;
-  createLinks = {
-    title: 'create',
+  configureLinks = {
+    title: 'configure',
     links: [
       {
         name: 'subject',
@@ -43,6 +43,11 @@ export class MainMenuComponent {
         name: 'subtopic',
         url: '/create-subtopics',
       },
+    ],
+  };
+  createLinks = {
+    title: 'create',
+    links: [
       {
         name: 'note',
         url: '/create-notes',
