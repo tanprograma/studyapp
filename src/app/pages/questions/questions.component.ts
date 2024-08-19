@@ -61,7 +61,6 @@ export class QuestionsComponent {
       this.topics = topics;
       this.subtopics = subtopics;
       this.items = questions;
-      console.log(questions);
     });
   }
 
