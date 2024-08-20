@@ -12,6 +12,8 @@ import { CreateTopicComponent } from './pages/create-topic/create-topic.componen
 import { CreateSubtopicComponent } from './pages/create-subtopic/create-subtopic.component';
 import { TodoComponent } from './pages/todo/todo.component';
 import { CreateTodoComponent } from './pages/create-todo/create-todo.component';
+import { CreatePlanComponent } from './pages/create-plan/create-plan.component';
+import { PlanComponent } from './pages/plan/plan.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/todos' },
@@ -23,7 +25,9 @@ export const routes: Routes = [
       { path: 'quotes', component: QuotesComponent },
       { path: 'questions', component: QuestionsComponent },
       { path: 'todos', component: TodoComponent },
+      { path: 'plans', component: PlanComponent },
       { path: 'create-todos', component: CreateTodoComponent },
+      { path: 'create-plans', component: CreatePlanComponent },
       { path: 'create-quotes', component: CreateQuotesComponent },
       { path: 'create-notes', component: CreateNotesComponent },
       { path: 'create-questions', component: CreateQuestionsComponent },

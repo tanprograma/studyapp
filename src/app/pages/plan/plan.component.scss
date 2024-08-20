@@ -1,0 +1,52 @@
+@import "../../styles/create.scss";
+ul {
+  padding: 10px;
+}
+li {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.page {
+  position: relative;
+}
+.page__heading {
+  position: sticky;
+  top: 0;
+}
+.complete-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.complete {
+  background-color: rgb(165, 217, 165);
+  color: white;
+}
+.complete:hover {
+  background-color: blue;
+  color: white;
+}
+
+.completed:hover {
+  cursor: not-allowed;
+  background-color: inherit;
+  color: inherit;
+}
+.all {
+  display: inline-block;
+  margin-left: 10px;
+  min-width: 8rem;
+}
+.all:hover {
+  cursor: pointer;
+  background-color: blue;
+  color: white;
+}
+.searchbox-container {
+  flex: 1 1 auto;
+}
+.flex {
+  display: flex;
+}

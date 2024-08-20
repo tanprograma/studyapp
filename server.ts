@@ -14,6 +14,7 @@ import subjects from './api/routes/subjects.mjs';
 import questions from './api/routes/questions';
 import quotes from './api/routes/quotes';
 import todos from './api/routes/todos';
+import plans from './api/routes/plans';
 dotenv.config();
 
 // The Express app is exported so that it can be used by serverless Functions.
@@ -43,6 +44,7 @@ export function app(): express.Express {
   server.use('/api/questions', questions);
   server.use('/api/quotes', quotes);
   server.use('/api/todos', todos);
+  server.use('/api/plans', plans);
   server.use('/api/topics', topics);
   server.use('/api/subtopics', subtopics);
   server.use('/api/subjects', subjects);

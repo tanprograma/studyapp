@@ -64,6 +64,10 @@ export class MainMenuComponent {
         name: 'todo',
         url: '/create-todos',
       },
+      {
+        name: 'plan',
+        url: '/create-plans',
+      },
     ],
   };
 }
