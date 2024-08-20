@@ -17,6 +17,16 @@ router.post('/create', async (req, res) => {
   const result = await TodoModel.create(todo);
   res.send(result);
 });
+router.post('/complete', async (req, res) => {
+  const _id = req.body._id;
+  const original = await TodoModel.findOne({ _id });
+  let result;
+  if (original != null) {
+    original.completed = true;
+    result = await original.save();
+  }
+  res.send(result);
+});
 router.post('/createmany', async (req, res) => {
   const todos = req.body;
   const result = await TodoModel.create(todos);

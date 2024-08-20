@@ -1,17 +1,31 @@
 <div class="create-container page">
   <div class="component flex-center page__heading">TODOS</div>
   @if(!loading){
-  <div class="component">
-    <input class="searchbox" type="date" (keyup)="search($event)" />
+  <div class="component flex">
+    <div class="searchbox-container">
+      <input class="searchbox" type="date" (change)="search($event)" />
+    </div>
+    <button class="all" (click)="getAll()">ALL</button>
   </div>
   @if(items.length>0){
-  <div class="component flex-center">TODOS({{ items.length }})</div>
+  <div class="component flex-center">TODOS({{ items.length }} )</div>
   <div class="component">
     <!-- fetched notes will display -->
 
     <ul>
       @for (item of items; track $index) {
-      <li>{{ item.value }}</li>
+      <li>
+        <div class="complete-container">
+          @if(item.completed==false){
+          <button class="complete" (click)="complete(item._id)">
+            COMPLETE
+          </button>
+          }@else if(item.completed==true){
+          <button class="completed">COMPLETED</button>
+          }
+        </div>
+        {{ item.value }}
+      </li>
       }
     </ul>
   </div>

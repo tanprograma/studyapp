@@ -22,4 +22,10 @@ export class TodoService {
       .get<Todo[]>(url)
       .pipe(catchError(this.http.handleError<Todo[]>('todos fetch', [])));
   }
+  complete(data: { _id: string }) {
+    const url = `${this.urls.TODO_API}/complete`;
+    return this.http
+      .post<any>(url, data)
+      .pipe(catchError(this.http.handleError<Todo | undefined>('update todo')));
+  }
 }
