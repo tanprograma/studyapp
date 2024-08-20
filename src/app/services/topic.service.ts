@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { catchError, Subject } from 'rxjs';
 import { HttpService } from './http.service';
 import { UrlService } from './url.service';
 import { Topic } from '../interfaces/topic';
@@ -13,10 +13,14 @@ export class TopicService {
   constructor() {}
   post(data: Topic) {
     const url = `${this.urls.TOPIC_API}/create`;
-    return this.http.post<Topic>(url, data);
+    return this.http
+      .post<Topic>(url, data)
+      .pipe(catchError(this.http.handleError<Topic>('topic fetch')));
   }
   get() {
     const url = `${this.urls.TOPIC_API}`;
-    return this.http.get<Topic[]>(url);
+    return this.http
+      .get<Topic[]>(url)
+      .pipe(catchError(this.http.handleError<Topic[]>('topic fetch', [])));
   }
 }

@@ -1,5 +1,8 @@
 <div class="create-container">
   <div class="component flex-center">CREATE SUBTOPIC</div>
+  @if(loading){
+  <app-loader></app-loader>
+  } @else if(!loading){
   <div class="component">
     <input class="searchbox" type="text" placeholder="search subject" />
   </div>
@@ -50,6 +53,7 @@
       <button class="btn" type="submit " [disabled]="!form.valid">SAVE</button>
     </div>
   </form>
+  }
   <div class="component">
     <div class="created-heading">CREATED ITEMS</div>
     @if(items.length>0){

@@ -1,4 +1,5 @@
 <div>
+  @if (!loading || !inner_loading) {
   <form
     class="component"
     action=""
@@ -71,6 +72,7 @@
       <button class="btn" type="submit " [disabled]="!form.valid">SAVE</button>
     </div>
   </form>
+  }
   <div class="component">
     <div class="created-heading">CREATED ITEMS</div>
     @if(items.length>0){

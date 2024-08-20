@@ -3,15 +3,17 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subject } from '../../interfaces/subject';
 import { HttpService } from '../../services/http.service';
 import { SubjectService } from '../../services/subject.service';
+import { LoaderComponent } from '../../components/loader/loader.component';
 
 @Component({
   selector: 'app-create-subject',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, LoaderComponent],
   templateUrl: './create-subject.component.html',
   styleUrl: './create-subject.component.scss',
 })
 export class CreateSubjectComponent {
+  loading = false;
   subjectService = inject(SubjectService);
   http = inject(HttpService);
   items: Subject[] = [];
@@ -20,10 +22,14 @@ export class CreateSubjectComponent {
     subject: ['', Validators.required],
   });
   save() {
+    this.loading = true;
     this.subjectService
       .post({ name: this.form.value.subject ?? '' })
       .subscribe((result) => {
-        this.items.push(result);
+        if (result != undefined) {
+          this.items.push(result);
+        }
+        this.loading = false;
       });
   }
   reset() {

@@ -1,4 +1,11 @@
 <div class="container">
   <div class="component flex-center">CREATE NOTES</div>
-  <notecreator [items]="items" (getValue)="save($event)"></notecreator>
+  @if (loading) {
+  <app-loader></app-loader>}
+
+  <notecreator
+    [loading]="loading"
+    [items]="items"
+    (getValue)="save($event)"
+  ></notecreator>
 </div>

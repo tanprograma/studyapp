@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { forkJoin } from 'rxjs';
+import { catchError, forkJoin, of } from 'rxjs';
 import { Note } from '../../interfaces/note';
 import { Subtopic } from '../../interfaces/subtopic';
 import { Topic } from '../../interfaces/topic';
@@ -11,15 +11,18 @@ import { SubtopicService } from '../../services/subtopic.service';
 import { TopicService } from '../../services/topic.service';
 import { Subject } from '../../interfaces/subject';
 import { QuestionService } from '../../services/question.service';
+import { LoaderComponent } from '../../components/loader/loader.component';
+import { Question } from '../../interfaces/question';
 
 @Component({
   selector: 'app-questions',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, LoaderComponent],
   templateUrl: './questions.component.html',
   styleUrl: './questions.component.scss',
 })
 export class QuestionsComponent {
+  loading = false;
   questionService = inject(QuestionService);
   topicService = inject(TopicService);
   subtopicService = inject(SubtopicService);
@@ -38,19 +41,21 @@ export class QuestionsComponent {
     subtopic: ['', Validators.required],
   });
 
-  items: Note[] = [];
+  all_items: Question[] = [];
+  items: Question[] = [];
 
   ngOnInit(): void {
     this.getResources();
   }
-  save() {
-    this.questionService
-      .getID(this.getSubtopicID(this.form.value.subtopic ?? ''))
-      .subscribe((res) => {
-        this.items = res;
-      });
+  search() {
+    this.items = this.all_items.filter((item) => {
+      return (
+        item.subtopicID == this.getSubtopicID(this.form.value.subtopic ?? '')
+      );
+    });
   }
   getResources() {
+    this.loading = true;
     forkJoin([
       this.subjectService.get(),
       this.topicService.get(),
@@ -60,7 +65,8 @@ export class QuestionsComponent {
       this.subjects = subjects;
       this.topics = topics;
       this.subtopics = subtopics;
-      this.items = questions;
+      this.items = this.all_items = questions;
+      this.loading = false;
     });
   }
 

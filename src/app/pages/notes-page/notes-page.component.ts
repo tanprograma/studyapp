@@ -7,18 +7,20 @@ import { HttpService } from '../../services/http.service';
 import { SubjectService } from '../../services/subject.service';
 import { SubtopicService } from '../../services/subtopic.service';
 import { TopicService } from '../../services/topic.service';
-import { forkJoin } from 'rxjs';
+import { catchError, forkJoin, of } from 'rxjs';
 import { NoteService } from '../../services/note.service';
 import { Note } from '../../interfaces/note';
+import { LoaderComponent } from '../../components/loader/loader.component';
 
 @Component({
   selector: 'app-notes-page',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, LoaderComponent],
   templateUrl: './notes-page.component.html',
   styleUrl: './notes-page.component.scss',
 })
 export class NotesPageComponent {
+  loading = false;
   noteService = inject(NoteService);
   topicService = inject(TopicService);
   subtopicService = inject(SubtopicService);
@@ -37,27 +39,32 @@ export class NotesPageComponent {
     subtopic: ['', Validators.required],
   });
 
+  all_items: Note[] = [];
   items: Note[] = [];
 
   ngOnInit(): void {
     this.getResources();
   }
-  save() {
-    this.noteService
-      .getID(this.getSubtopicID(this.form.value.subtopic ?? ''))
-      .subscribe((res) => {
-        this.items = res;
-      });
+  search() {
+    this.items = this.all_items.filter((item) => {
+      return (
+        item.subtopicID == this.getSubtopicID(this.form.value.subtopic ?? '')
+      );
+    });
   }
   getResources() {
+    this.loading = true;
     forkJoin([
       this.subjectService.get(),
       this.topicService.get(),
       this.subtopicService.get(),
-    ]).subscribe(([subjects, topics, subtopics]) => {
+      this.noteService.get(),
+    ]).subscribe(([subjects, topics, subtopics, notes]) => {
       this.subjects = subjects;
       this.topics = topics;
       this.subtopics = subtopics;
+      this.all_items = this.items = notes;
+      this.loading = false;
     });
   }
 

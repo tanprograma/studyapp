@@ -6,15 +6,17 @@ import { HttpService } from '../../services/http.service';
 import { Topic } from '../../interfaces/topic';
 import { SubjectService } from '../../services/subject.service';
 import { Subject } from '../../interfaces/subject';
+import { LoaderComponent } from '../../components/loader/loader.component';
 
 @Component({
   selector: 'app-create-topic',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, LoaderComponent],
   templateUrl: './create-topic.component.html',
   styleUrl: './create-topic.component.scss',
 })
 export class CreateTopicComponent implements OnInit {
+  loading = false;
   topicService = inject(TopicService);
   subjectService = inject(SubjectService);
   http = inject(HttpService);
@@ -26,22 +28,28 @@ export class CreateTopicComponent implements OnInit {
     topic: ['', Validators.required],
   });
   save() {
+    this.loading = true;
     this.topicService
       .post({
         name: this.form.value.topic ?? '',
         subjectID: this.getSubjectID(this.form.value.subject ?? ''),
       })
       .subscribe((result) => {
-        this.items.push(result);
-        this.resetForm();
+        if (result != undefined) {
+          this.items.push(result);
+          this.resetForm();
+        }
+        this.loading = false;
       });
   }
   ngOnInit(): void {
     this.getSubjects();
   }
   getSubjects() {
+    this.loading = true;
     this.subjectService.get().subscribe((subjects) => {
       this.subjects = subjects;
+      this.loading = false;
     });
   }
   getSubjectID(name: string) {

@@ -6,17 +6,19 @@ import { HttpService } from '../../services/http.service';
 import { SubjectService } from '../../services/subject.service';
 import { TopicService } from '../../services/topic.service';
 import { SubtopicService } from '../../services/subtopic.service';
-import { forkJoin, Observable, of } from 'rxjs';
+import { catchError, forkJoin, Observable, of } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { LoaderComponent } from '../../components/loader/loader.component';
 
 @Component({
   selector: 'app-create-subtopic',
   standalone: true,
-  imports: [ReactiveFormsModule, AsyncPipe],
+  imports: [ReactiveFormsModule, AsyncPipe, LoaderComponent],
   templateUrl: './create-subtopic.component.html',
   styleUrl: './create-subtopic.component.scss',
 })
 export class CreateSubtopicComponent implements OnInit {
+  loading = false;
   topicService = inject(TopicService);
   subtopicService = inject(SubtopicService);
   subjectService = inject(SubjectService);
@@ -36,6 +38,7 @@ export class CreateSubtopicComponent implements OnInit {
     this.getResources();
   }
   save() {
+    this.loading = false;
     this.subtopicService
       .post({
         name: this.form.value.subtopic ?? '',
@@ -43,17 +46,27 @@ export class CreateSubtopicComponent implements OnInit {
         topicID: this.getTopicID(this.form.value.topic ?? ''),
       })
       .subscribe((result) => {
-        this.items.push(result);
-        this.resetForm();
+        if (result != result) {
+          this.items.push(result);
+          this.resetForm();
+        }
+        this.loading = false;
       });
   }
   getResources() {
-    forkJoin([this.subjectService.get(), this.topicService.get()]).subscribe(
-      ([subjects, topics]) => {
+    this.loading = true;
+    forkJoin([this.subjectService.get(), this.topicService.get()])
+      .pipe(
+        catchError((err) => {
+          console.log(err.message);
+          return of([[], []]);
+        })
+      )
+      .subscribe(([subjects, topics]) => {
         this.subjects = subjects;
         this.topics = topics;
-      }
-    );
+        this.loading = false;
+      });
   }
 
   getSubjectID(name: string) {

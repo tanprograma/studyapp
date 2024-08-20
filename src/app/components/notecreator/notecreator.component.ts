@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { forkJoin } from 'rxjs';
+import { catchError, forkJoin, of } from 'rxjs';
 
 import { Subtopic } from '../../interfaces/subtopic';
 import { Topic } from '../../interfaces/topic';
@@ -11,15 +11,19 @@ import { SubtopicService } from '../../services/subtopic.service';
 import { TopicService } from '../../services/topic.service';
 import { Subject } from '../../interfaces/subject';
 import { NoteValue } from '../../interfaces/notevalue';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'notecreator',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, LoaderComponent],
   templateUrl: './notecreator.component.html',
   styleUrl: './notecreator.component.scss',
 })
 export class NotecreatorComponent {
+  @Input() loading!: boolean;
+  inner_loading = false;
+
   @Output() getValue = new EventEmitter<NoteValue>();
   @Input() items!: NoteValue[];
   topicService = inject(TopicService);
@@ -43,6 +47,12 @@ export class NotecreatorComponent {
   ngOnInit(): void {
     this.getResources();
   }
+  load() {
+    this.inner_loading = true;
+  }
+  stopLoad() {
+    this.inner_loading = false;
+  }
   save() {
     this.getValue.emit({
       value: this.form.value.note ?? '',
@@ -64,6 +74,7 @@ export class NotecreatorComponent {
     //   });
   }
   getResources() {
+    this.load();
     forkJoin([
       this.subjectService.get(),
       this.topicService.get(),
@@ -72,6 +83,8 @@ export class NotecreatorComponent {
       this.subjects = subjects;
       this.topics = topics;
       this.subtopics = subtopics;
+
+      this.stopLoad();
     });
   }
 

@@ -9,22 +9,25 @@ import {
 import { Quote } from '../../interfaces/quote';
 import { QuoteService } from '../../services/quote.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoaderComponent } from '../../components/loader/loader.component';
 
 @Component({
   selector: 'app-quotes',
   standalone: true,
-  imports: [],
+  imports: [LoaderComponent],
   templateUrl: './quotes.component.html',
   styleUrl: './quotes.component.scss',
 })
 export class QuotesComponent implements OnInit {
   quoteService = inject(QuoteService);
   all_Items: Quote[] = [];
-
+  loading = false;
   items: Quote[] = [];
   ngOnInit(): void {
+    this.loading = true;
     this.quoteService.get().subscribe((res) => {
       this.all_Items = this.items = res;
+      this.loading = false;
     });
   }
   search(e: Event) {

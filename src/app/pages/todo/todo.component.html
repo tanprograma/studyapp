@@ -1,5 +1,6 @@
 <div class="create-container page">
   <div class="component flex-center page__heading">TODOS</div>
+  @if(!loading){
   <div class="component">
     <input class="searchbox" type="date" (keyup)="search($event)" />
   </div>
@@ -14,5 +15,7 @@
       }
     </ul>
   </div>
+  } }@else if (loading) {
+  <app-loader></app-loader>
   }
 </div>

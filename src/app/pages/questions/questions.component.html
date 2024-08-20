@@ -1,11 +1,14 @@
 <div class="create-container page">
   <div class="component flex-center page__heading">QUESTIONS</div>
+  @if (loading) {
+  <app-loader></app-loader>
+  }@else if (!loading) {
   <form
     class="component"
     action=""
     class="component"
     [formGroup]="form"
-    (ngSubmit)="save()"
+    (ngSubmit)="search()"
   >
     <div class="form-flex">
       <div class="control">
@@ -74,5 +77,5 @@
       }
     </ul>
   </div>
-  }
+  } }
 </div>

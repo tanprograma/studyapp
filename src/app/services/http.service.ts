@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,5 +16,15 @@ export class HttpService {
   }
   post<T>(url: string, data: T) {
     return this.http.post<T>(url, data, this.options);
+  }
+  handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      // console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      console.log(`${operation} failed : ${error.message}`);
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }
