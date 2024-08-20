@@ -24,6 +24,20 @@ export function app(): express.Express {
   const indexHtml = join(serverDistFolder, 'index.server.html');
 
   const commonEngine = new CommonEngine();
+  server.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', ['*']);
+    res.append('Access-Control-Allow-Headers', ['*']);
+    res.append('Access-Control-Allow-Methods', [
+      'PUT',
+      'GET',
+      'HEAD',
+      'POST',
+      'DELETE',
+      'OPTIONS',
+    ]);
+
+    next();
+  });
   server.use(express.json());
   server.use('/api/notes', notes);
   server.use('/api/questions', questions);
