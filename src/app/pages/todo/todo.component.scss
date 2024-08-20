@@ -20,6 +20,10 @@ li {
   display: flex;
   justify-content: flex-end;
 }
+.complete {
+  background-color: rgb(165, 217, 165);
+  color: white;
+}
 .complete:hover {
   background-color: blue;
   color: white;
