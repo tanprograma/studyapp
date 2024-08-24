@@ -3,6 +3,16 @@
   @for (item of article.content; track $index) { @if (item.format=='paragraph')
   {
   <p [innerHTML]="item.composition.value"></p>
+  } @if (item.format=='quote') {
+  <p class="article quote">
+    &ldquo; {{ item.composition.value }}&rdquo;-
+    @if(item.composition.attribute!=''){
+    <span class="attribute">
+      {{ item.composition.attribute }}
+    </span>
+
+    }
+  </p>
   } @if (item.format=='ulist') {
   <ul>
     @for (li of item.composition.values; track $index) {

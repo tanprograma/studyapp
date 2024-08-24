@@ -23,6 +23,9 @@
       <button [class.tool]="tool == 'ulist'" (click)="selectTool('ulist')">
         ulist
       </button>
+      <button [class.tool]="tool == 'quote'" (click)="selectTool('quote')">
+        quote
+      </button>
       <button [class.tool]="tool == 'save'" (click)="preSave()">save</button>
     </div>
   </div>
@@ -41,6 +44,8 @@
   <heading-creator (onCreate)="onCreate($event)"></heading-creator>
   } @if (!loading && tool=='paragraph') {
   <paragraph-creator (onCreate)="onCreate($event)"></paragraph-creator>
+  } @if (!loading && tool=='quote') {
+  <article-quote-creator (onCreate)="onCreate($event)"></article-quote-creator>
   } @if (!loading && tool=='title') {
   <form
     class="component"

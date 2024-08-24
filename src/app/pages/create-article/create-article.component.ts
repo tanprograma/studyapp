@@ -9,12 +9,14 @@ import { ParagraphCreatorComponent } from '../../components/paragraph-creator/pa
 import { ListCreatorComponent } from '../../components/list-creator/list-creator.component';
 import { HeadingCreatorComponent } from '../../components/heading-creator/heading-creator.component';
 import { PromptConfirmComponent } from '../../components/prompt-confirm/prompt-confirm.component';
+import { ArticleQuoteCreatorComponent } from '../../components/article-quote-creator/article-quote-creator.component';
 type Tool =
   | 'title'
   | 'paragraph'
   | 'olist'
   | 'ulist'
   | 'heading'
+  | 'quote'
   | 'preview'
   | 'save';
 @Component({
@@ -28,6 +30,7 @@ type Tool =
     ListCreatorComponent,
     HeadingCreatorComponent,
     PromptConfirmComponent,
+    ArticleQuoteCreatorComponent,
   ],
   templateUrl: './create-article.component.html',
   styleUrl: './create-article.component.scss',
