@@ -1,0 +1,32 @@
+<div class="create-container page">
+  <div class="component flex-center">MANAGE ARTICLES</div>
+
+  <div class="component">
+    <div class="created-heading">CREATED ARTICLES</div>
+    @if(items.length>0){
+    <table>
+      <thead>
+        <tr>
+          <th>sn</th>
+          <th>id</th>
+          <th>article</th>
+          <th>delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of items; track $index) {
+        <tr>
+          <td>{{ $index + 1 }}</td>
+          <td>{{ item._id }}</td>
+          <td [innerHTML]="item.title"></td>
+          <td><button class="btn-round btn--danger">delete</button></td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    }
+  </div>
+  @if(loading){
+  <prompt-confirm></prompt-confirm>
+  }
+</div>

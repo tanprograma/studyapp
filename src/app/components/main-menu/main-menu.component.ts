@@ -74,4 +74,33 @@ export class MainMenuComponent {
       },
     ],
   };
+  manageLinks = {
+    title: 'Manage',
+    links: [
+      // {
+      //   name: 'note',
+      //   url: '/create-notes',
+      // },
+      // {
+      //   name: 'question',
+      //   url: '/create-questions',
+      // },
+      // {
+      //   name: 'quote',
+      //   url: '/create-quotes',
+      // },
+      // {
+      //   name: 'todo',
+      //   url: '/create-todos',
+      // },
+      // {
+      //   name: 'plan',
+      //   url: '/create-plans',
+      // },
+      {
+        name: 'articles',
+        url: '/manage-articles',
+      },
+    ],
+  };
 }

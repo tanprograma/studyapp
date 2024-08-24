@@ -77,5 +77,31 @@
     [message]="'confirm submit article'"
     (onConfirm)="save($event)"
   ></prompt-confirm>
+  } @if(items.length>0){
+  <div class="component">
+    <div class="created-heading">CREATED ARTICLES</div>
+    @if(items.length>0){
+    <table>
+      <thead>
+        <tr>
+          <th>sn</th>
+          <th>id</th>
+          <th>article</th>
+          <th>delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of items; track $index) {
+        <tr>
+          <td>{{ $index + 1 }}</td>
+          <td>{{ item._id }}</td>
+          <td [innerHTML]="item.title"></td>
+          <td><button class="btn-round btn--danger">delete</button></td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    }
+  </div>
   }
 </div>

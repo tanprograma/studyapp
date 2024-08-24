@@ -65,9 +65,10 @@
           <p class="flex-center">list of articles ({{ items.length }})</p>
           <ul>
             @for (item of items; track $index) {
-            <li (click)="selectArticle(item.title)">
-              {{ item.title }}
-            </li>
+            <li
+              [innerHTML]="item.title"
+              (click)="selectArticle(item.title)"
+            ></li>
             }
           </ul>
           <!-- <div class="paginated flex">
@@ -94,9 +95,7 @@
         <p class="flex-center">More articles</p>
         <ul>
           @for (item of paginated.articles; track $index) {
-          <li (click)="selectArticle(item.title)">
-            {{ item.title }}
-          </li>
+          <li [innerHTML]="item.title" (click)="selectArticle(item.title)"></li>
           }
         </ul>
         <div class="paginated flex">
