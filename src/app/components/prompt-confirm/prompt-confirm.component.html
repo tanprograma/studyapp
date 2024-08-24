@@ -1,0 +1,19 @@
+<div class="confirm-container">
+  @if(message!=undefined) {
+  <div class="confirm-box">
+    <div class="confirm-message">{{ message }}</div>
+    <div class="confirm-actions">
+      <button class="red" (click)="cancel()">CANCEL</button>
+      <button class="blue" (click)="confirm()">OK</button>
+    </div>
+  </div>
+  } @if(message==undefined){
+  <div class="confirm-box">
+    <div class="confirm-message">
+      <fa-icon [icon]="loader" class="fa-spin"></fa-icon>
+      <fa-icon [icon]="loader" class="fa-spin"></fa-icon>
+      <fa-icon [icon]="loader" class="fa-spin"></fa-icon>
+    </div>
+  </div>
+  }
+</div>

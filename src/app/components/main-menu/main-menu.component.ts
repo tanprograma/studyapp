@@ -68,6 +68,10 @@ export class MainMenuComponent {
         name: 'plan',
         url: '/create-plans',
       },
+      {
+        name: 'article',
+        url: '/create-articles',
+      },
     ],
   };
 }

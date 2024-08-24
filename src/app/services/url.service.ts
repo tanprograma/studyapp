@@ -22,6 +22,7 @@ export class UrlService {
   QUOTE_API = `${this.BASE_URL}/api/quotes`;
   TODO_API = `${this.BASE_URL}/api/todos`;
   PLAN_API = `${this.BASE_URL}/api/plans`;
+  ARTICLE_API = `${this.BASE_URL}/api/articles`;
 
   constructor() {}
 }

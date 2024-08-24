@@ -1,0 +1,21 @@
+<article>
+  <div class="title" [innerHTML]="article.title"></div>
+  @for (item of article.content; track $index) { @if (item.format=='paragraph')
+  {
+  <p [innerHTML]="item.composition.value"></p>
+  } @if (item.format=='ulist') {
+  <ul>
+    @for (li of item.composition.values; track $index) {
+    <li [innerHTML]="li.value"></li>
+    }
+  </ul>
+  } @if (item.format=='olist') {
+  <ol>
+    @for (li of item.composition.values; track $index) {
+    <li [innerHTML]="li.value"></li>
+    }
+  </ol>
+  } @if (item.format=='heading') {
+  <h2 [innerHTML]="item.composition.value"></h2>
+  } }
+</article>

@@ -1,0 +1,22 @@
+<form
+  class="component"
+  action=""
+  class="component"
+  [formGroup]="form"
+  (ngSubmit)="save()"
+>
+  <div class="control">
+    <!-- <label for="subject">subject</label> -->
+    <textarea
+      type="text"
+      id="content"
+      name="content"
+      placeholder="write content ..."
+      autocomplete="off"
+      formControlName="content"
+    ></textarea>
+    <div class="control form-flex">
+      <button class="btn" type="submit " [disabled]="!form.valid">SAVE</button>
+    </div>
+  </div>
+</form>
