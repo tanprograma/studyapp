@@ -11,11 +11,12 @@ import { catchError, forkJoin, of } from 'rxjs';
 import { NoteService } from '../../services/note.service';
 import { Note } from '../../interfaces/note';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { PromptConfirmComponent } from '../../components/prompt-confirm/prompt-confirm.component';
 
 @Component({
   selector: 'app-notes-page',
   standalone: true,
-  imports: [ReactiveFormsModule, LoaderComponent],
+  imports: [ReactiveFormsModule, PromptConfirmComponent],
   templateUrl: './notes-page.component.html',
   styleUrl: './notes-page.component.scss',
 })

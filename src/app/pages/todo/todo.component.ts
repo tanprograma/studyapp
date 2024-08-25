@@ -3,10 +3,11 @@ import { Todo } from '../../interfaces/todo';
 import { TodoService } from '../../services/todo.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { PromptConfirmComponent } from '../../components/prompt-confirm/prompt-confirm.component';
 @Component({
   selector: 'app-todo',
   standalone: true,
-  imports: [ReactiveFormsModule, LoaderComponent],
+  imports: [ReactiveFormsModule, PromptConfirmComponent],
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.scss',
 })

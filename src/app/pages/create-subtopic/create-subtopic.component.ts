@@ -9,11 +9,12 @@ import { SubtopicService } from '../../services/subtopic.service';
 import { catchError, forkJoin, Observable, of } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { PromptConfirmComponent } from '../../components/prompt-confirm/prompt-confirm.component';
 
 @Component({
   selector: 'app-create-subtopic',
   standalone: true,
-  imports: [ReactiveFormsModule, AsyncPipe, LoaderComponent],
+  imports: [ReactiveFormsModule, AsyncPipe, PromptConfirmComponent],
   templateUrl: './create-subtopic.component.html',
   styleUrl: './create-subtopic.component.scss',
 })
@@ -38,7 +39,7 @@ export class CreateSubtopicComponent implements OnInit {
     this.getResources();
   }
   save() {
-    this.loading = false;
+    this.loading = true;
     this.subtopicService
       .post({
         name: this.form.value.subtopic ?? '',

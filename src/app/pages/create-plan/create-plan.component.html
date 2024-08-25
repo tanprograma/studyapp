@@ -1,4 +1,4 @@
-<div class="create-container">
+<div class="create-container page">
   <div class="component flex-center">CREATE PLAN</div>
   @if(!loading){
   <form
@@ -25,7 +25,7 @@
     </div>
   </form>
   }@else if (loading) {
-  <app-loader></app-loader>
+  <prompt-confirm />
   }
   <div class="component">
     <div class="created-heading">

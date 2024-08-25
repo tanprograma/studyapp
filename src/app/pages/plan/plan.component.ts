@@ -2,11 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Plan } from '../../interfaces/plan';
 import { PlanService } from '../../services/plan.service';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { PromptConfirmComponent } from '../../components/prompt-confirm/prompt-confirm.component';
 
 @Component({
   selector: 'app-plan',
   standalone: true,
-  imports: [LoaderComponent],
+  imports: [PromptConfirmComponent],
   templateUrl: './plan.component.html',
   styleUrl: './plan.component.scss',
 })

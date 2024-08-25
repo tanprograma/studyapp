@@ -3,11 +3,12 @@ import { QuestionService } from '../../services/question.service';
 import { Question } from '../../interfaces/question';
 import { NotecreatorComponent } from '../../components/notecreator/notecreator.component';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { PromptConfirmComponent } from '../../components/prompt-confirm/prompt-confirm.component';
 
 @Component({
   selector: 'app-create-questions',
   standalone: true,
-  imports: [NotecreatorComponent, LoaderComponent],
+  imports: [NotecreatorComponent, PromptConfirmComponent],
   templateUrl: './create-questions.component.html',
   styleUrl: './create-questions.component.scss',
 })

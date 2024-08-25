@@ -4,11 +4,12 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Plan } from '../../interfaces/plan';
 import { HttpService } from '../../services/http.service';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { PromptConfirmComponent } from '../../components/prompt-confirm/prompt-confirm.component';
 
 @Component({
   selector: 'app-create-plan',
   standalone: true,
-  imports: [ReactiveFormsModule, LoaderComponent],
+  imports: [ReactiveFormsModule, PromptConfirmComponent],
   templateUrl: './create-plan.component.html',
   styleUrl: './create-plan.component.scss',
 })

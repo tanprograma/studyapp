@@ -7,11 +7,12 @@ import { Topic } from '../../interfaces/topic';
 import { SubjectService } from '../../services/subject.service';
 import { Subject } from '../../interfaces/subject';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { PromptConfirmComponent } from '../../components/prompt-confirm/prompt-confirm.component';
 
 @Component({
   selector: 'app-create-topic',
   standalone: true,
-  imports: [ReactiveFormsModule, LoaderComponent],
+  imports: [ReactiveFormsModule, PromptConfirmComponent],
   templateUrl: './create-topic.component.html',
   styleUrl: './create-topic.component.scss',
 })

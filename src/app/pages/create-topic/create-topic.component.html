@@ -1,7 +1,7 @@
-<div class="create-container">
+<div class="create-container page">
   <div class="component flex-center">CREATE TOPIC</div>
   @if(loading){
-  <app-loader></app-loader>
+  <prompt-confirm />
   } @else if(!loading){
   <div class="component">
     <input class="searchbox" type="text" placeholder="search subject" />

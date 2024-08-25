@@ -4,11 +4,12 @@ import { Todo } from '../../interfaces/todo';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { PromptConfirmComponent } from '../../components/prompt-confirm/prompt-confirm.component';
 
 @Component({
   selector: 'app-create-todo',
   standalone: true,
-  imports: [ReactiveFormsModule, LoaderComponent],
+  imports: [ReactiveFormsModule, PromptConfirmComponent],
   templateUrl: './create-todo.component.html',
   styleUrl: './create-todo.component.scss',
 })

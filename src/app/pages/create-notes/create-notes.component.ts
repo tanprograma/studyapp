@@ -4,11 +4,12 @@ import { NoteService } from '../../services/note.service';
 import { Note } from '../../interfaces/note';
 import { NotecreatorComponent } from '../../components/notecreator/notecreator.component';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { PromptConfirmComponent } from '../../components/prompt-confirm/prompt-confirm.component';
 
 @Component({
   selector: 'app-create-notes',
   standalone: true,
-  imports: [NotecreatorComponent, LoaderComponent],
+  imports: [NotecreatorComponent, PromptConfirmComponent],
   templateUrl: './create-notes.component.html',
   styleUrl: './create-notes.component.scss',
 })

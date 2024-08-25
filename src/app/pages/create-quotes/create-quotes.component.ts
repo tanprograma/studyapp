@@ -4,11 +4,12 @@ import { QuoteService } from '../../services/quote.service';
 import { Quote } from '../../interfaces/quote';
 import { HttpService } from '../../services/http.service';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { PromptConfirmComponent } from '../../components/prompt-confirm/prompt-confirm.component';
 
 @Component({
   selector: 'app-create-quotes',
   standalone: true,
-  imports: [ReactiveFormsModule, LoaderComponent],
+  imports: [ReactiveFormsModule, PromptConfirmComponent],
   templateUrl: './create-quotes.component.html',
   styleUrl: './create-quotes.component.scss',
 })

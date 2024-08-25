@@ -71,7 +71,7 @@
     </div>
   </form>
   } @else if (loading) {
-  <app-loader></app-loader>
+  <prompt-confirm />
   } @if (prompt) {
   <prompt-confirm
     [message]="'confirm submit article'"

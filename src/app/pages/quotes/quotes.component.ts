@@ -10,11 +10,12 @@ import { Quote } from '../../interfaces/quote';
 import { QuoteService } from '../../services/quote.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { PromptConfirmComponent } from '../../components/prompt-confirm/prompt-confirm.component';
 
 @Component({
   selector: 'app-quotes',
   standalone: true,
-  imports: [LoaderComponent],
+  imports: [PromptConfirmComponent],
   templateUrl: './quotes.component.html',
   styleUrl: './quotes.component.scss',
 })

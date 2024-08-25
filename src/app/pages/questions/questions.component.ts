@@ -13,11 +13,12 @@ import { Subject } from '../../interfaces/subject';
 import { QuestionService } from '../../services/question.service';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { Question } from '../../interfaces/question';
+import { PromptConfirmComponent } from '../../components/prompt-confirm/prompt-confirm.component';
 
 @Component({
   selector: 'app-questions',
   standalone: true,
-  imports: [ReactiveFormsModule, LoaderComponent],
+  imports: [ReactiveFormsModule, PromptConfirmComponent],
   templateUrl: './questions.component.html',
   styleUrl: './questions.component.scss',
 })
