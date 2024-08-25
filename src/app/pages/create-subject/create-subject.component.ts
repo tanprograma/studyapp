@@ -4,11 +4,12 @@ import { Subject } from '../../interfaces/subject';
 import { HttpService } from '../../services/http.service';
 import { SubjectService } from '../../services/subject.service';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { PromptConfirmComponent } from '../../components/prompt-confirm/prompt-confirm.component';
 
 @Component({
   selector: 'app-create-subject',
   standalone: true,
-  imports: [ReactiveFormsModule, LoaderComponent],
+  imports: [ReactiveFormsModule, LoaderComponent, PromptConfirmComponent],
   templateUrl: './create-subject.component.html',
   styleUrl: './create-subject.component.scss',
 })
