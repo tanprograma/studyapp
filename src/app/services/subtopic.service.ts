@@ -26,4 +26,16 @@ export class SubtopicService {
         catchError(this.http.handleError<Subtopic[]>('subtopic fetch', []))
       );
   }
+  delete(id: string) {
+    const url = `${this.urls.SUBTOPIC_API}/delete/${id}`;
+    return this.http
+      .delete<{ success: boolean; result: Subtopic }>(url)
+      .pipe(
+        catchError(
+          this.http.handleError<{ success: boolean; result: Subtopic }>(
+            'delete subtopic'
+          )
+        )
+      );
+  }
 }

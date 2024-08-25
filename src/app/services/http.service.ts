@@ -17,6 +17,9 @@ export class HttpService {
   post<T>(url: string, data: T) {
     return this.http.post<T>(url, data, this.options);
   }
+  delete<T>(url: string) {
+    return this.http.delete<T>(url);
+  }
   handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       // console.error(error); // log to console instead

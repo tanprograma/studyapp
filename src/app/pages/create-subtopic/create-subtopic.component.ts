@@ -47,10 +47,11 @@ export class CreateSubtopicComponent implements OnInit {
         topicID: this.getTopicID(this.form.value.topic ?? ''),
       })
       .subscribe((result) => {
-        if (result != result) {
+        if (result._id != undefined) {
           this.items.push(result);
           this.resetForm();
         }
+
         this.loading = false;
       });
   }

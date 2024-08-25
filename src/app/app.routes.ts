@@ -17,6 +17,7 @@ import { PlanComponent } from './pages/plan/plan.component';
 import { CreateArticleComponent } from './pages/create-article/create-article.component';
 import { ArticleComponent } from './pages/article/article.component';
 import { ManageArticlesComponent } from './pages/manage-articles/manage-articles.component';
+import { ManageSubtopicsComponent } from './pages/manage-subtopics/manage-subtopics.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/todos' },
@@ -31,6 +32,7 @@ export const routes: Routes = [
       { path: 'plans', component: PlanComponent },
       { path: 'articles', component: ArticleComponent },
       { path: 'manage-articles', component: ManageArticlesComponent },
+      { path: 'manage-subtopics', component: ManageSubtopicsComponent },
       { path: 'create-todos', component: CreateTodoComponent },
       { path: 'create-plans', component: CreatePlanComponent },
       { path: 'create-quotes', component: CreateQuotesComponent },

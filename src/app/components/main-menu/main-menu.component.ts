@@ -101,6 +101,10 @@ export class MainMenuComponent {
         name: 'articles',
         url: '/manage-articles',
       },
+      {
+        name: 'subtopics',
+        url: '/manage-subtopics',
+      },
     ],
   };
 }
