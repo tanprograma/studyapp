@@ -65,6 +65,7 @@ export class ArticleComponent {
       }
     }
     this.paginated.start_index = count;
+    this.paginated.articles = this.paginated.articles.sort(this.sortTime);
   }
   paginateBackward() {
     if (this.paginated.start_index <= 4) return;
@@ -80,6 +81,7 @@ export class ArticleComponent {
       }
     }
     this.paginated.start_index = count;
+    this.paginated.articles = this.paginated.articles.sort(this.sortTime);
   }
   selectArticle(title: string) {
     const article = this.all_Items.find((article) => {
