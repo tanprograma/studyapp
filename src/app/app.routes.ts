@@ -19,6 +19,10 @@ import { ArticleComponent } from './pages/article/article.component';
 import { ManageArticlesComponent } from './pages/manage-articles/manage-articles.component';
 import { ManageSubtopicsComponent } from './pages/manage-subtopics/manage-subtopics.component';
 
+import { McqResultsComponent } from './pages/mcq-results/mcq-results.component';
+import { CreateTestsComponent } from './pages/create-tests/create-tests.component';
+import { TaketestComponent } from './pages/taketest/taketest.component';
+
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/todos' },
   {
@@ -31,8 +35,11 @@ export const routes: Routes = [
       { path: 'todos', component: TodoComponent },
       { path: 'plans', component: PlanComponent },
       { path: 'articles', component: ArticleComponent },
+      { path: 'mcqs-results', component: McqResultsComponent },
       { path: 'manage-articles', component: ManageArticlesComponent },
+      { path: 'manage-mcqs', component: TaketestComponent },
       { path: 'manage-subtopics', component: ManageSubtopicsComponent },
+      { path: 'create-mcqs', component: CreateTestsComponent },
       { path: 'create-todos', component: CreateTodoComponent },
       { path: 'create-plans', component: CreatePlanComponent },
       { path: 'create-quotes', component: CreateQuotesComponent },

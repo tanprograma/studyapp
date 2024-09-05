@@ -38,4 +38,10 @@ export class SubtopicService {
         )
       );
   }
+  // getID<T>(name: string, items: T[]) {
+  //   return items.find((item) => topic.name == topicName)?._id as string;
+  // }
+  // getName(topicID: string, topics: Topic[]) {
+  //   return topics.find((topic) => topic._id == topicID)?.name as string;
+  // }
 }

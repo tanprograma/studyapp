@@ -2,6 +2,11 @@
   <div class="component flex-center">CREATE SUBTOPIC</div>
   @if(loading){
   <prompt-confirm></prompt-confirm>
+  } @if(confirm){
+  <prompt-confirm
+    [message]="'confirm to save subject'"
+    (onConfirm)="onConfirm($event)"
+  ></prompt-confirm>
   } @else if(!loading){
   <div class="component">
     <input class="searchbox" type="text" placeholder="search subject" />
@@ -11,7 +16,7 @@
     action=""
     class="component form-flex"
     [formGroup]="form"
-    (ngSubmit)="save()"
+    (ngSubmit)="confirmSave()"
   >
     <div class="control">
       <!-- <label for="subject">subject</label> -->

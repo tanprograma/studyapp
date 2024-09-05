@@ -1,0 +1,76 @@
+<div class="create-container page">
+  <div class="component page__heading">
+    <div class="flex-center mcq-heading">
+      CREATE TEST {{ exam.questions.length > 0 ? exam.questions.length : "" }}
+    </div>
+
+    <form class="flex-center" [formGroup]="form" (ngSubmit)="add()">
+      <div class="control">
+        <select
+          type="text"
+          id="subject"
+          name="subject"
+          formControlName="subject"
+          (change)="selectTopics($event)"
+        >
+          <option value="" selected disabled>select subject</option>
+          @for (item of subjects; track $index) {
+          <option [value]="item.name">{{ item.name }}</option>
+          }
+        </select>
+      </div>
+      <div class="control">
+        <select
+          type="text"
+          id="topic"
+          name="topic"
+          formControlName="topic"
+          (change)="selectSubtopics($event)"
+        >
+          <option value="" selected disabled>select topic</option>
+          @for (item of filteredTopics; track $index) {
+          <option [value]="item.name">{{ item.name }}</option>
+          }
+        </select>
+      </div>
+      <div class="control">
+        <select
+          type="text"
+          id="subtopic"
+          name="subtopic"
+          placeholder="enter subtopic"
+          autocomplete="off"
+          formControlName="subtopic"
+        >
+          <option value="" selected disabled>select subtopic</option>
+          @for (item of filteredSubtopics; track $index) {
+          <option [value]="item.name">{{ item.name }}</option>
+          }
+        </select>
+      </div>
+      <select name="qn" id="qn" formControlName="format">
+        <option value="" selected disabled>select qn format</option>
+        <option value="mcq">mcq</option>
+        <option value="mmq">mmq</option>
+      </select>
+      <button class="btn-basic" [disabled]="!form.valid">ADD</button>
+    </form>
+  </div>
+
+  <!-- code for question view -->
+  @for (qn of exam.questions; track $index) {
+  <mcq [qn]="qn" (onSelect)="select($event)" />
+  } @if(exam.questions.length>0){
+  <div class="component flex-center">
+    <button class="btn-basic" (click)="confirm()" [disabled]="exam.completed">
+      CREATE TEST
+    </button>
+  </div>
+  }
+</div>
+<!-- code for confirmation widget here -->
+@if(confirmation){
+<prompt-confirm [message]="'confirm to save'" (onConfirm)="save($event)" />
+} @if(loading){
+<prompt-confirm />
+}

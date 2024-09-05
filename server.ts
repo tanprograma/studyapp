@@ -16,6 +16,8 @@ import quotes from './api/routes/quotes';
 import todos from './api/routes/todos';
 import plans from './api/routes/plans';
 import articles from './api/routes/articles';
+import exams from './api/routes/mcqs';
+import results from './api/routes/results';
 dotenv.config();
 
 // The Express app is exported so that it can be used by serverless Functions.
@@ -42,6 +44,8 @@ export function app(): express.Express {
   });
   server.use(express.json());
   server.use('/api/notes', notes);
+  server.use('/api/exams', exams);
+  server.use('/api/results', results);
   server.use('/api/questions', questions);
   server.use('/api/quotes', quotes);
   server.use('/api/todos', todos);
@@ -97,7 +101,7 @@ function run(): void {
         useUnifiedTopology: true,
       })
       .then(() => {
-        console.log('database connected successfully');
+        console.log(`database ${DATABASE_URL} connected successfully`);
       })
       .catch((err) => {
         console.log(err);

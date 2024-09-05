@@ -1,0 +1,101 @@
+@import "../../styles/create.scss";
+ul {
+  padding: 10px;
+}
+li {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+// .page {
+//   // position: relative;
+// }
+
+.complete-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.complete {
+  background-color: rgb(165, 217, 165);
+  color: white;
+}
+.complete:hover {
+  background-color: blue;
+  color: white;
+}
+
+.completed:hover {
+  cursor: not-allowed;
+  background-color: inherit;
+  color: inherit;
+}
+.all {
+  display: inline-block;
+  margin-left: 10px;
+  min-width: 8rem;
+}
+.all:hover {
+  cursor: pointer;
+  background-color: blue;
+  color: white;
+}
+.searchbox-container {
+  flex: 1 1 auto;
+}
+.flex {
+  display: flex;
+}
+// .views {
+//   width: 100%;
+// }
+form {
+  width: 100%;
+}
+.page__heading {
+  position: sticky;
+  top: 0;
+}
+.flex-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+// .mcq-heading {
+//   flex: 0 0 60%;
+// }
+@media (max-width: 1060px) {
+  .mcq-heading {
+    flex: 1 1 auto;
+  }
+  select[name="subject"] {
+    display: none;
+  }
+}
+@media (max-width: 910px) {
+  select[name="subject"],
+  select[name="topic"] {
+    display: none;
+  }
+}
+@media (max-width: 885px) {
+  select[name="subject"],
+  select[name="subtopic"],
+  select[name="topic"] {
+    display: none;
+  }
+}
+.btn-basic:disabled:hover {
+  cursor: not-allowed;
+}
+.selected {
+  background-color: blue;
+  color: white;
+}
+.test-head {
+  flex: 1 1 auto;
+  height: 2rem;
+  border-radius: 10px;
+  background-color: white;
+}

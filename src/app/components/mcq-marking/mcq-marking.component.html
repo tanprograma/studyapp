@@ -1,0 +1,36 @@
+<div
+  class="component"
+  action="
+"
+>
+  <p>question {{ qn.qn }}</p>
+  @for (letter of options; track $index) {
+  <div class="control">
+    @if (qn.type=='mmq') {
+    <input
+      type="checkbox"
+      [name]="letter.option.toLowerCase()"
+      [id]="letter.option.toLowerCase()"
+      [value]="letter.option"
+      [checked]="letter.isAnswer"
+      (change)="select($event)"
+    />
+
+    }@if(qn.type=='mcq'){
+    <input
+      type="radio"
+      [name]="qn.qn"
+      [id]="letter.option.toLowerCase()"
+      [value]="letter.option"
+      [checked]="letter.isAnswer"
+      (change)="select($event)"
+    />
+    }
+    <label [htmlFor]="letter.option.toLowerCase()">{{ letter.option }}</label>
+  </div>
+
+  }
+  <button class="btn-basic" (click)="toggleOptions()">
+    {{ all ? "SHOW LESS" : "SHOW MORE" }}
+  </button>
+</div>

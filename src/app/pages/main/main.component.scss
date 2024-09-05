@@ -25,6 +25,8 @@ $padding: 10px;
 }
 .app__main {
   flex: 1 1 70%;
+  position: relative;
+  height: 100%;
 }
 
 .app__footer {

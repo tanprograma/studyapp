@@ -20,6 +20,7 @@ import { PromptConfirmComponent } from '../../components/prompt-confirm/prompt-c
 })
 export class CreateSubtopicComponent implements OnInit {
   loading = false;
+  confirm = false;
   topicService = inject(TopicService);
   subtopicService = inject(SubtopicService);
   subjectService = inject(SubjectService);
@@ -38,19 +39,26 @@ export class CreateSubtopicComponent implements OnInit {
   ngOnInit(): void {
     this.getResources();
   }
+  confirmSave() {
+    this.confirm = true;
+  }
+  onConfirm(reply: boolean) {
+    this.confirm = false;
+    if (!reply) return;
+    this.save();
+  }
   save() {
     this.loading = true;
+
     this.subtopicService
       .post({
         name: this.form.value.subtopic ?? '',
-        subjectID: this.getSubjectID(this.form.value.subject ?? ''),
-        topicID: this.getTopicID(this.form.value.topic ?? ''),
+        subjectID: this.getID(this.form.value.subject ?? '', this.subjects),
+        topicID: this.getID(this.form.value.topic ?? '', this.filteredTopics),
       })
       .subscribe((result) => {
-        if (result._id != undefined) {
-          this.items.push(result);
-          this.resetForm();
-        }
+        this.items.push(result);
+        this.resetForm();
 
         this.loading = false;
       });
@@ -71,24 +79,29 @@ export class CreateSubtopicComponent implements OnInit {
       });
   }
 
-  getSubjectID(name: string) {
-    const s = this.subjects.find((subject) => subject.name == name) as Subject;
-    return s._id as string;
-  }
-  getTopicID(name: string) {
-    const s = this.topics.find((topic) => topic.name == name) as Subject;
-    return s._id as string;
-  }
   resetForm() {
     this.form.patchValue({
       subtopic: '',
     });
   }
   selectTopics(event: Event) {
+    this.resetTopicAndSubtopic();
     const target = event.target as HTMLInputElement;
 
     this.filteredTopics = this.topics.filter(
-      (topic) => topic.subjectID == this.getSubjectID(target.value)
+      (topic) => topic.subjectID == this.getID(target.value, this.subjects)
     );
+  }
+  resetTopicAndSubtopic() {
+    this.form.patchValue({
+      topic: '',
+      subtopic: '',
+    });
+  }
+  getID<T extends { _id?: string; name: string }>(name: string, items: T[]) {
+    return items.find((item) => item.name == name)?._id as string;
+  }
+  getName<T extends { _id?: string; name: string }>(id: string, items: T[]) {
+    return items.find((item) => item._id == id)?.name as string;
   }
 }

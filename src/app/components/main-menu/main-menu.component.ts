@@ -107,4 +107,21 @@ export class MainMenuComponent {
       },
     ],
   };
+  testLinks = {
+    title: 'Exams and Tests',
+    links: [
+      {
+        name: 'create',
+        url: '/create-mcqs',
+      },
+      {
+        name: 'take test',
+        url: '/manage-mcqs',
+      },
+      {
+        name: 'test results',
+        url: '/mcqs-results',
+      },
+    ],
+  };
 }

@@ -23,4 +23,10 @@ export class TopicService {
       .get<Topic[]>(url)
       .pipe(catchError(this.http.handleError<Topic[]>('topic fetch', [])));
   }
+  getTopicID(topicName: string, topics: Topic[]) {
+    return topics.find((topic) => topic.name == topicName)?._id as string;
+  }
+  getTopicName(topicID: string, topics: Topic[]) {
+    return topics.find((topic) => topic._id == topicID)?.name as string;
+  }
 }

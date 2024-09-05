@@ -1,0 +1,129 @@
+<div class="create-container page">
+  <div class="component page__heading">
+    <div class="flex-left views">
+      <button
+        class="btn-basic"
+        [class.selected]="view == 'tests'"
+        (click)="setView('tests')"
+      >
+        EXAMS & TESTS
+      </button>
+      <button
+        class="btn-basic"
+        [class.selected]="view == 'mark'"
+        (click)="setView('mark')"
+      >
+        TEST ARENA
+      </button>
+      @if (this.heading!='') {
+      <div class="test-head flex-center">{{ heading }}</div>
+      }
+    </div>
+    @if(view!='mark'){
+    <form class="flex-center" [formGroup]="form" (ngSubmit)="clearFilter()">
+      <div class="control">
+        <select
+          type="text"
+          id="subject"
+          name="subject"
+          formControlName="subject"
+          (change)="filterSubject($event)"
+        >
+          <option value="" selected disabled>select subject</option>
+          @for (item of subjects; track $index) {
+          <option [value]="item.name">{{ item.name }}</option>
+          }
+        </select>
+      </div>
+      <div class="control">
+        <select
+          type="text"
+          id="topic"
+          name="topic"
+          formControlName="topic"
+          (change)="filterTopic($event)"
+        >
+          <option value="" selected disabled>select topic</option>
+          @for (item of filteredTopics; track $index) {
+          <option [value]="item.name">{{ item.name }}</option>
+          }
+        </select>
+      </div>
+      <div class="control">
+        <select
+          type="text"
+          id="subtopic"
+          name="subtopic"
+          placeholder="enter subtopic"
+          autocomplete="off"
+          formControlName="subtopic"
+        >
+          <option value="" selected disabled>select subtopic</option>
+          @for (item of filteredSubtopics; track $index) {
+          <option [value]="item.name">{{ item.name }}</option>
+          }
+        </select>
+      </div>
+      <select name="qn" id="qn" formControlName="format">
+        <option value="" selected disabled>select qn format</option>
+        <option value="mcq">mcq</option>
+        <option value="mmq">mmq</option>
+      </select>
+      <button class="btn-basic">CLEAR</button>
+    </form>
+    }
+  </div>
+  <!-- code for tests view -->
+  @if(view=='tests'){
+  <div class="component flex-center">
+    <table>
+      <thead>
+        <tr>
+          <th>sn</th>
+          <th>subject</th>
+          <th>topic</th>
+          <th>subtopic</th>
+          <th>created</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of filteredExams; track $index) {
+        <tr>
+          <td>{{ $index + 1 }}</td>
+          <td>{{ item.subjectID }}</td>
+          <td>{{ item.topicID }}</td>
+          <td>{{ item.subtopicID }}</td>
+          <td>{{ getDate(item.createdAt ?? "") }}</td>
+          <td>
+            <button
+              class="btn-basic"
+              [disabled]="item.marked"
+              (click)="toMark(item)"
+            >
+              TEST
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  }
+  <!-- code for mark view -->
+  @if (view=='mark') { @for (qn of exam.questions; track $index) {
+  <mcq [qn]="qn" (onSelect)="mark($event)" />
+  } @if(exam.questions.length>0){
+  <div class="component flex-center">
+    <button class="btn-basic" (click)="confirm()" [disabled]="exam.marked">
+      SAVE RESULTS
+    </button>
+  </div>
+  } }
+</div>
+<!-- code for confirmation widget here -->
+@if(confirmation){
+<prompt-confirm [message]="'confirm to save'" (onConfirm)="save($event)" />
+} @if(loading){
+<prompt-confirm />
+}

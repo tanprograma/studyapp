@@ -35,6 +35,15 @@ a {
 button {
   border: 0;
   height: 2rem;
+  min-width: 8rem;
+  margin: 5px;
+}
+.btn-basic:hover {
+  background-color: black;
+  color: white;
+}
+.btn-basic:disabled:hover {
+  cursor: not-allowed;
 }
 button:hover {
   cursor: pointer;
@@ -60,4 +69,14 @@ button:hover {
 // all main pages
 .page-main {
   position: relative;
+}
+
+tbody tr:hover {
+  background-color: aqua;
+}
+table {
+  border-collapse: collapse;
+}
+td {
+  max-width: 26rem;
 }
