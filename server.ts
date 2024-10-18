@@ -18,6 +18,7 @@ import plans from './api/routes/plans';
 import articles from './api/routes/articles';
 import exams from './api/routes/mcqs';
 import results from './api/routes/results';
+import sanitize from './api/routes/sanitize';
 dotenv.config();
 
 // The Express app is exported so that it can be used by serverless Functions.
@@ -43,6 +44,7 @@ export function app(): express.Express {
     next();
   });
   server.use(express.json());
+  server.use('/api/sanitize', sanitize);
   server.use('/api/notes', notes);
   server.use('/api/exams', exams);
   server.use('/api/results', results);
@@ -88,7 +90,7 @@ export function app(): express.Express {
 }
 
 function run(): void {
-  const port = process.env['PORT'] || 4000;
+  const port = process.env['PORT'] || 4300;
   const DATABASE_URL = process.env['DATABASE_URL'] as string;
 
   // Start up the Node server

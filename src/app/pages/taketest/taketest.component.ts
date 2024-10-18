@@ -13,6 +13,7 @@ import { PromptConfirmComponent } from '../../components/prompt-confirm/prompt-c
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { McqComponent } from '../../components/mcq/mcq.component';
 import { DOCUMENT } from '@angular/common';
+import { MCQ } from '../../interfaces/mcq';
 type View = 'tests' | 'mark';
 @Component({
   selector: 'app-taketest',
@@ -120,6 +121,14 @@ export class TaketestComponent implements OnInit {
       subtopicID: subtopicID,
       marked: true,
     };
+    // return {
+    //   questions: this.randomizeAnswer(this.exam.questions),
+    //   completed: true,
+    //   subjectID: subjectID,
+    //   topicID: topicID,
+    //   subtopicID: subtopicID,
+    //   marked: true,
+    // };
   }
   heading: string = '';
   mark(item: { qn: number; option: string; type: string; state: boolean }) {
@@ -276,5 +285,14 @@ export class TaketestComponent implements OnInit {
   getTopicName(id: string) {
     const s = this.topics.find((topic) => topic._id == id) as Topic;
     return s.name as string;
+  }
+  randomizeAnswer(questions: MCQ[]) {
+    return questions.map((question) => {
+      const inde = 3;
+      question.options = question.options.map((option, index) => {
+        return inde == index ? { ...option, selected: true } : option;
+      });
+      return question;
+    });
   }
 }
