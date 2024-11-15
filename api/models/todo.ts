@@ -1,14 +1,12 @@
 import { Schema, model } from 'mongoose';
-interface ITodo {
-  value: string;
-  completed: boolean;
-}
-const schema = new Schema<ITodo>(
+import { Todo } from '../../src/app/interfaces/todo';
+
+const schema = new Schema<Todo>(
   {
-    value: { type: String, lowercase: true },
+    title: { type: String, lowercase: true },
     completed: { type: Boolean, default: () => false },
   },
   { timestamps: true }
 );
-const mymodel = model<ITodo>('Todo', schema);
+const mymodel = model<Todo>('Todo', schema);
 export default mymodel;

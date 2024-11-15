@@ -1,55 +1,43 @@
 import { Routes } from '@angular/router';
-import { CreateNotesComponent } from './pages/create-notes/create-notes.component';
-import { CreateQuestionsComponent } from './pages/create-questions/create-questions.component';
-import { CreateQuotesComponent } from './pages/create-quotes/create-quotes.component';
-import { CreateSubjectComponent } from './pages/create-subject/create-subject.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { MainComponent } from './pages/main/main.component';
-import { NotesPageComponent } from './pages/notes-page/notes-page.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { ArticlesComponent } from './pages/articles/articles.component';
+import { LoginComponent } from './pages/login/login.component';
+import { NotesComponent } from './pages/notes/notes.component';
+import { PlansComponent } from './pages/plans/plans.component';
+import { ProjectsComponent } from './pages/projects/projects.component';
 import { QuestionsComponent } from './pages/questions/questions.component';
 import { QuotesComponent } from './pages/quotes/quotes.component';
-import { CreateTopicComponent } from './pages/create-topic/create-topic.component';
-import { CreateSubtopicComponent } from './pages/create-subtopic/create-subtopic.component';
 import { TodoComponent } from './pages/todo/todo.component';
-import { CreateTodoComponent } from './pages/create-todo/create-todo.component';
-import { CreatePlanComponent } from './pages/create-plan/create-plan.component';
-import { PlanComponent } from './pages/plan/plan.component';
-import { CreateArticleComponent } from './pages/create-article/create-article.component';
-import { ArticleComponent } from './pages/article/article.component';
-import { ManageArticlesComponent } from './pages/manage-articles/manage-articles.component';
-import { ManageSubtopicsComponent } from './pages/manage-subtopics/manage-subtopics.component';
-
-import { McqResultsComponent } from './pages/mcq-results/mcq-results.component';
-import { CreateTestsComponent } from './pages/create-tests/create-tests.component';
-import { TaketestComponent } from './pages/taketest/taketest.component';
+import { CreateExamComponent } from './components/create-exam/create-exam.component';
+import { ExamsComponent } from './pages/exams/exams.component';
+import { ArticlesViewComponent } from './components/articles-view/articles-view.component';
+import { BootComponent } from './components/boot/boot.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { StudyQuestionsComponent } from './pages/study-questions/study-questions.component';
 
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/todos' },
-  {
-    path: '',
-    component: MainComponent,
-    children: [
-      { path: 'notes', component: NotesPageComponent },
-      { path: 'quotes', component: QuotesComponent },
-      { path: 'questions', component: QuestionsComponent },
-      { path: 'todos', component: TodoComponent },
-      { path: 'plans', component: PlanComponent },
-      { path: 'articles', component: ArticleComponent },
-      { path: 'mcqs-results', component: McqResultsComponent },
-      { path: 'manage-articles', component: ManageArticlesComponent },
-      { path: 'manage-mcqs', component: TaketestComponent },
-      { path: 'manage-subtopics', component: ManageSubtopicsComponent },
-      { path: 'create-mcqs', component: CreateTestsComponent },
-      { path: 'create-todos', component: CreateTodoComponent },
-      { path: 'create-plans', component: CreatePlanComponent },
-      { path: 'create-quotes', component: CreateQuotesComponent },
-      { path: 'create-notes', component: CreateNotesComponent },
-      { path: 'create-articles', component: CreateArticleComponent },
-      { path: 'create-questions', component: CreateQuestionsComponent },
-      { path: 'create-subjects', component: CreateSubjectComponent },
-      { path: 'create-topics', component: CreateTopicComponent },
-      { path: 'create-subtopics', component: CreateSubtopicComponent },
-      { path: 'login', component: LoginPageComponent },
-    ],
-  },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'notes', component: NotesComponent },
+  { path: 'quotes', component: QuotesComponent },
+  { path: 'questions', component: QuestionsComponent },
+  { path: 'todos', component: TodoComponent },
+  { path: 'articles', component: ArticlesComponent },
+  { path: 'projects', component: ProjectsComponent },
+  { path: 'plans', component: PlansComponent },
+  { path: 'admin', component: AdminComponent },
+  { path: 'articles', component: ArticlesComponent },
+  { path: 'articles/:id', component: ArticlesViewComponent },
+
+  { path: 'boot', component: BootComponent },
+  { path: 'admin', component: AdminComponent },
+
+  { path: 'study', component: StudyQuestionsComponent },
+  { path: 'exams', component: ExamsComponent },
+
+  { path: 'exams/:id', component: CreateExamComponent },
+  { path: '**', component: NotFoundComponent },
+
+  // s{ path: ':userid/create-questions', component: CreateQuestionsComponent },
+  // { path: ':userid/create-subjects', component: CreateSubjectComponent },
 ];

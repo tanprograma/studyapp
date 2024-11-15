@@ -1,0 +1,42 @@
+// .mat-mdc-radio-button ~ .mat-mdc-radio-button {
+//   margin-left: 16px;
+// }
+
+.heading {
+  display: flex;
+  //   justify-content: center;
+}
+.spaced {
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+.options {
+  display: flex;
+  flex-wrap: wrap;
+}
+.option {
+  flex: 1 1 100%;
+  cursor: not-allowed;
+}
+.question {
+  background-color: rgb(229, 224, 195);
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  color: white;
+}
+.correct {
+  background-color: blue;
+  //   opacity: 40%;
+  //   color: white;
+}
+.wrong {
+  background-color: red;
+  //   opacity: 40%;
+  //   color: white;
+}
+.status {
+  margin-top: 5px;
+  padding: 5px;
+}

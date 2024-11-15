@@ -1,0 +1,35 @@
+@if (store.loading()) {
+<div class="content">
+  <load-indicator [message]="'processing..'"></load-indicator>
+</div>
+}@else {
+<form class="subject-form" [formGroup]="form" (ngSubmit)="createTopic()">
+  <mat-form-field class="control-subject">
+    <mat-label>select subject</mat-label>
+    <mat-select
+      formControlName="subject"
+      #subjectInput
+      (valueChange)="setSubject(subjectInput.value)"
+    >
+      @for (subject of appStore.subjects(); track $index) {
+      <mat-option [value]="subject.name">{{ subject.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="control">
+    <mat-label>topic name</mat-label>
+    <input matInput type="text" formControlName="topic" />
+  </mat-form-field>
+  <button mat-fab>
+    <mat-icon>add</mat-icon>
+  </button>
+</form>
+
+<div class="created">
+  <created
+    [items]="store.createdTopics()"
+    (onDelete)="deleteItem($event)"
+    class="control"
+  />
+</div>
+}

@@ -1,0 +1,16 @@
+.subject-form,
+.created {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.form-controls {
+  flex: 0 1 50%;
+}
+.form-control {
+  width: 100%;
+}
+.control {
+  flex: 0 1 50%;
+  margin: 10px;
+}

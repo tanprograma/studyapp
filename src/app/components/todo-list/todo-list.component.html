@@ -1,0 +1,21 @@
+<mat-selection-list class="todo-list">
+  @for(item of items; track item._id){
+  <mat-list-option
+    [selected]="item.completed ? true : false"
+    (click)="onToggleTodo(item._id)"
+  >
+    <div class="todo-item">
+      <mat-icon class="delete-todo" (click)="onDeleteTodo($event, item._id)"
+        >delete</mat-icon
+      >
+
+      <span
+        [ngStyle]="{
+          'text-decoration': item.completed ? 'line-through' : 'none'
+        }"
+        >{{ item.title }}</span
+      >
+    </div>
+  </mat-list-option>
+  }
+</mat-selection-list>

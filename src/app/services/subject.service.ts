@@ -1,26 +1,24 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpService } from './http.service';
+
 import { UrlService } from './url.service';
 import { Subject } from '../interfaces/subject';
-import { catchError, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SubjectService {
-  http = inject(HttpService);
-  urls = inject(UrlService);
+  private $axios = inject(UrlService).$axios;
   constructor() {}
-  post(data: Subject) {
-    const url = `${this.urls.SUBJECT_API}/create`;
-    return this.http
-      .post<Subject>(url, data)
-      .pipe(catchError(this.http.handleError<Subject>('subject fetch')));
+  async getSubjects() {
+    const res = await this.$axios.get(`/subjects`);
+    return res.data;
   }
-  get() {
-    const url = `${this.urls.SUBJECT_API}`;
-    return this.http
-      .get<Subject[]>(url)
-      .pipe(catchError(this.http.handleError<Subject[]>('subject fetch', [])));
+  async addSubject(quote: Partial<Subject>): Promise<Subject> {
+    const req = await this.$axios.post('/subjects', quote);
+    return req.data;
+  }
+  async deleteSubject(id: string) {
+    const req = await this.$axios.delete(`/subjects/${id}`);
+    return req.data;
   }
 }

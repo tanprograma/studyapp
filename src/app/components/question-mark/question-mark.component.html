@@ -1,0 +1,48 @@
+<div class="question">
+  <p class="heading">
+    <span class="title">question {{ item.sn }}</span>
+    <button class="spaced" mat-flat-button (click)="toggleMore()">
+      {{ more ? "close" : "expand" }}
+    </button>
+  </p>
+  <p
+    class="status"
+    [class.correct]="item.selected == item.option"
+    [class.wrong]="item.selected != item.option"
+  >
+    {{
+      item.option == item.selected
+        ? "correct"
+        : "wrong: answer is " + item.option + " ; you selected " + item.selected
+    }}
+  </p>
+  @if(more){
+  <mat-radio-group class="options">
+    @for (option of choices; track $index) {
+
+    <mat-radio-button
+      class="option"
+      name="choice"
+      [disabled]="true"
+      [value]="option"
+      [checked]="option == item.selected"
+      >{{ option }}</mat-radio-button
+    >
+
+    }
+  </mat-radio-group>
+  }@else {
+  <mat-radio-group class="options">
+    @for (option of shortChoices; track $index) {
+    <mat-radio-button
+      class="option"
+      name="choice"
+      [value]="option"
+      [checked]="option == item.selected"
+      [disabled]="true"
+      >{{ option }}</mat-radio-button
+    >
+    }
+  </mat-radio-group>
+  }
+</div>

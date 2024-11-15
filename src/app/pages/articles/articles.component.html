@@ -1,0 +1,17 @@
+<div class="content">
+  <h1>MY ARTICLES</h1>
+  <reloader
+    [items]="store.articles().length"
+    (onClick)="getArticles()"
+  ></reloader>
+  <div class="exams">
+    @for (article of store.articles(); track $index) {
+
+    <a class="exam" [routerLink]="['/articles', article._id]">
+      <span class="flex-10 date">{{ article.createdAt }}</span>
+      <span>{{ article.title.main }}</span>
+    </a>
+
+    }
+  </div>
+</div>

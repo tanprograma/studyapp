@@ -1,0 +1,76 @@
+<div class="content">
+  <h1>EXAM-TEST YOURSELF</h1>
+  @if (!!store.selectedExam().questions.length && !markView) {
+  <div class="subject-form">
+    <div class="item">
+      <span>questions</span>
+      <span>{{ store.selectedExam().questions.length }}</span>
+    </div>
+    <div class="item">
+      <span>topic</span>
+      <span>{{ store.selectedExam().topic }}</span>
+    </div>
+    <div class="item">
+      <span>book</span>
+      <span>{{ store.selectedExam().book }} </span>
+    </div>
+  </div>
+  @if(!!store.selectedExam().questions){
+  <div class="created">
+    <div class="questions">
+      @for (question of store.selectedExam().questions; track $index) {
+
+      <question-take
+        [item]="question"
+        (onSelectOption)="selectChoice($event)"
+      />
+
+      }
+    </div>
+  </div>
+  } @if (markView && !!store.selectedExam().questions.length) {
+
+  <div class="created">
+    <div class="questions">
+      @for (question of store.selectedExam().questions; track $index) {
+
+      <question-mark [item]="question" />
+
+      }
+    </div>
+  </div>
+  <div class="subject-form results">
+    <div class="item">
+      <span>questions</span>
+      <span>{{ store.selectedExam().questions.length }}</span>
+    </div>
+    <div class="item">
+      <span>score</span>
+      <span>{{ store.score() }}({{ store.scorePercentage() }})</span>
+    </div>
+    <div class="item">
+      <span>book</span>
+      <span>{{ store.selectedExam().book }}</span>
+    </div>
+  </div>
+  }
+  <div class="action">
+    <button
+      class="action-btn"
+      mat-flat-button
+      [disabled]="markView"
+      (click)="mark()"
+    >
+      MARK
+    </button>
+    <a
+      class="action-btn"
+      mat-flat-button
+      [disabled]="!markView"
+      routerLink="/exams"
+    >
+      GO TO EXAMS
+    </a>
+  </div>
+  }
+</div>

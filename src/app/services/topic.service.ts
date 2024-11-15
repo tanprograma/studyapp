@@ -1,32 +1,23 @@
 import { inject, Injectable } from '@angular/core';
-import { catchError, Subject } from 'rxjs';
-import { HttpService } from './http.service';
-import { UrlService } from './url.service';
 import { Topic } from '../interfaces/topic';
+import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TopicService {
-  http = inject(HttpService);
-  urls = inject(UrlService);
+  private $axios = inject(UrlService).$axios;
   constructor() {}
-  post(data: Topic) {
-    const url = `${this.urls.TOPIC_API}/create`;
-    return this.http
-      .post<Topic>(url, data)
-      .pipe(catchError(this.http.handleError<Topic>('topic fetch')));
+  async getTopics() {
+    const res = await this.$axios.get(`/topics`);
+    return res.data;
   }
-  get() {
-    const url = `${this.urls.TOPIC_API}`;
-    return this.http
-      .get<Topic[]>(url)
-      .pipe(catchError(this.http.handleError<Topic[]>('topic fetch', [])));
+  async addTopic(quote: Partial<Topic>): Promise<Topic> {
+    const req = await this.$axios.post('/topics', quote);
+    return req.data;
   }
-  getTopicID(topicName: string, topics: Topic[]) {
-    return topics.find((topic) => topic.name == topicName)?._id as string;
-  }
-  getTopicName(topicID: string, topics: Topic[]) {
-    return topics.find((topic) => topic._id == topicID)?.name as string;
+  async deleteTopic(id: string) {
+    const req = await this.$axios.delete(`/topics/${id}`);
+    return req.data;
   }
 }

@@ -1,0 +1,44 @@
+.subject-form,
+.created {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.results {
+  padding: 10px;
+  margin: 10px;
+  border: 5px;
+  background-color: lightgrey;
+}
+.control {
+  flex: 0 1 50%;
+}
+.questions {
+  flex: 0 1 60%;
+}
+.item {
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  height: 100%;
+  overflow-y: scroll;
+  position: relative;
+}
+h1 {
+  width: 100%;
+  background-color: black;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  text-align: center;
+}
+.action {
+  display: flex;
+  justify-content: center;
+}
+.action-btn:disabled {
+  cursor: not-allowed;
+}

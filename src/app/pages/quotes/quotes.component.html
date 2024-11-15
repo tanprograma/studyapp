@@ -1,26 +1,26 @@
-<div class="create-container page">
-  <div class="component flex-center page__heading">QUOTES</div>
-  @if(loading){
-  <prompt-confirm />
-  }@else if(!loading){
-  <div class="component">
-    <input
-      class="searchbox"
-      type="text"
-      placeholder="search author"
-      (keyup)="search($event)"
-    />
-  </div>
-  @if(items.length>0){
-  <div class="component flex-center">QUOTES({{ items.length }} )</div>
-  <div class="component">
-    <!-- fetched notes will display -->
-
-    <ul>
-      @for (item of items; track $index) {
-      <li>&ldquo;{{ item.value }}&rdquo; -{{ item.author }}</li>
-      }
-    </ul>
-  </div>
-  } }
+<div class="content">
+  <h1>QUOTES</h1>
+  <mat-tab-group>
+    <mat-tab label="Quotes"></mat-tab>
+    <mat-tab label="Create Quotes">
+      <form
+        class="create-quotes"
+        [formGroup]="quoteForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <mat-form-field class="control">
+          <mat-label>write a quote or paste a quote</mat-label>
+          <textarea matInput name="" id="" formControlName="title"></textarea>
+        </mat-form-field>
+        <mat-form-field class="control">
+          <mat-label>quote author</mat-label>
+          <input matInput name="" id="" formControlName="author" />
+        </mat-form-field>
+        <button mat-fab extended class="control">
+          <mat-icon matPrefix>save</mat-icon>
+          SAVE
+        </button>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
 </div>

@@ -1,14 +1,12 @@
 import { Schema, model } from 'mongoose';
-interface IPlan {
-  value: string;
-  completed: boolean;
-}
-const schema = new Schema<IPlan>(
+import { Plan } from '../../src/app/interfaces/plan';
+const schema = new Schema<Plan>(
   {
-    value: { type: String, lowercase: true },
+    author: String,
+    title: { type: String, lowercase: true },
     completed: { type: Boolean, default: () => false },
   },
   { timestamps: true }
 );
-const mymodel = model<IPlan>('Plan', schema);
+const mymodel = model<Plan>('Plan', schema);
 export default mymodel;

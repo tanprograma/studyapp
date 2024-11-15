@@ -1,0 +1,57 @@
+@if (store.loading()) {
+<div class="content">
+  <load-indicator [message]="'processing request'"></load-indicator>
+</div>
+}@else {
+<div class="content">
+  @if (view=='edit') {
+  <form class="subject-form" [formGroup]="form">
+    <mat-form-field class="control">
+      <mat-label>main heading...</mat-label>
+      <input matInput type="text" formControlName="main" />
+    </mat-form-field>
+    <mat-form-field class="control">
+      <mat-label>sub heading...</mat-label>
+      <input matInput type="text" formControlName="sub" />
+    </mat-form-field>
+    <mat-form-field class="control w-50">
+      <mat-label>write or paste the article here...</mat-label>
+      <textarea matInput type="text" formControlName="article"></textarea>
+    </mat-form-field>
+
+    <div class="control flexed">
+      <button type="reset" mat-fab extended class="mr-auto">
+        <mat-icon>clear</mat-icon>CLEAR
+      </button>
+      <button (click)="toggleView($event)" mat-flat-button class="ml-auto">
+        {{ view == "edit" ? "preview" : "edit" }}
+      </button>
+      <button
+        (click)="saveArticle()"
+        mat-flat-button
+        [disabled]="view == 'edit'"
+        type="submit"
+      >
+        SAVE
+      </button>
+    </div>
+  </form>
+
+  }@else {
+  <div class="subject-form">
+    <div class="control">
+      <button (click)="toggleView($event)" mat-flat-button>edit</button>
+      <button (click)="saveArticle()" mat-flat-button type="submit">
+        SAVE
+      </button>
+    </div>
+  </div>
+  @if (!store.loading()) {
+  <article-preview
+    [article]="{ content: form.value.article ?? '' }"
+  ></article-preview>
+  }@if(store.loading()) {
+  <load-indicator [message]="'submitting article'"></load-indicator>
+  } }
+</div>
+}

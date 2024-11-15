@@ -1,0 +1,39 @@
+<div class="content">
+  <h1>STUDY QUESTIONS</h1>
+  <form class="component" [formGroup]="form" (ngSubmit)="getStudyQuestions()">
+    <mat-form-field class="control">
+      <mat-label>select subject</mat-label>
+      <mat-select
+        matInput
+        #subjectInput
+        (valueChange)="setSubject(subjectInput.value)"
+      >
+        @for (item of appState.subjects(); track $index) {
+        <mat-option [value]="item.name">
+          {{ item.name }}
+        </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="control">
+      <mat-label>select topic</mat-label>
+      <mat-select matInput formControlName="topic">
+        @for (item of appState.filteredTopics(); track $index) {
+        <mat-option [value]="item.name">
+          {{ item.name }}
+        </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <button mat-fab>
+      <mat-icon>search</mat-icon>
+    </button>
+  </form>
+  <div class="notes">
+    @for (item of store.studyQuestions(); track $index) {
+    <div class="note">
+      {{ item.title }}
+    </div>
+    }
+  </div>
+</div>

@@ -1,5 +1,5 @@
-export interface Quote {
-  value: string;
+export type Quote = {
+  title: string;
+  _id: string;
   author: string;
-  _id?: string;
-}
+};

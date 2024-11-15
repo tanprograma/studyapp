@@ -1,0 +1,22 @@
+.item-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid grey;
+  margin: 2px;
+}
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.spaced {
+  flex: 1 1 auto;
+}
+.id {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.delete-icon:hover {
+  color: red;
+}

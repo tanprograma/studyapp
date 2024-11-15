@@ -7,18 +7,21 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import bootstrap from './src/main.server';
 
+import users from './api/routes/users';
 import notes from './api/routes/notes.mjs';
-import subtopics from './api/routes/subtopics.mjs';
 import topics from './api/routes/topics.mjs';
 import subjects from './api/routes/subjects.mjs';
-import questions from './api/routes/questions';
 import quotes from './api/routes/quotes';
 import todos from './api/routes/todos';
 import plans from './api/routes/plans';
 import articles from './api/routes/articles';
-import exams from './api/routes/mcqs';
-import results from './api/routes/results';
-import sanitize from './api/routes/sanitize';
+import exams from './api/routes/exams';
+import results from './api/routes/exam-results';
+
+import books from './api/routes/books';
+import projects from './api/routes/projects';
+import studyqns from './api/routes/studyqns';
+
 dotenv.config();
 
 // The Express app is exported so that it can be used by serverless Functions.
@@ -44,17 +47,20 @@ export function app(): express.Express {
     next();
   });
   server.use(express.json());
-  server.use('/api/sanitize', sanitize);
+
+  server.use('/api/users', users);
   server.use('/api/notes', notes);
   server.use('/api/exams', exams);
-  server.use('/api/results', results);
-  server.use('/api/questions', questions);
+  server.use('/api/study', studyqns);
+  server.use('/api/projects', projects);
+  server.use('/api/books', books);
+
+  server.use('/api/exam-results', results);
   server.use('/api/quotes', quotes);
   server.use('/api/todos', todos);
   server.use('/api/plans', plans);
   server.use('/api/articles', articles);
   server.use('/api/topics', topics);
-  server.use('/api/subtopics', subtopics);
   server.use('/api/subjects', subjects);
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
@@ -90,7 +96,7 @@ export function app(): express.Express {
 }
 
 function run(): void {
-  const port = process.env['PORT'] || 4300;
+  const port = process.env['PORT'] || 4000;
   const DATABASE_URL = process.env['DATABASE_URL'] as string;
 
   // Start up the Node server

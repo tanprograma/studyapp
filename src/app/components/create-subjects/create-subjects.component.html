@@ -1,0 +1,23 @@
+@if (store.loading()) {
+<div class="content">
+  <load-indicator [message]="'processing'"></load-indicator>
+</div>
+}@else {
+<form
+  class="subject-form"
+  [formGroup]="subjectForm"
+  (ngSubmit)="createSubject()"
+>
+  <mat-form-field class="control">
+    <mat-label>enter subject</mat-label>
+    <input matInput type="text" formControlName="subject" />
+  </mat-form-field>
+</form>
+<div class="created">
+  <created
+    [items]="store.createdSubjects()"
+    (onDelete)="deleteItem($event)"
+    class="control"
+  />
+</div>
+}

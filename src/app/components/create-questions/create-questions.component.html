@@ -1,0 +1,62 @@
+@if (store.loading()) {
+<div class="content">
+  <load-indicator [message]="'processing request'"></load-indicator>
+</div>
+}@else {
+<form class="subject-form" [formGroup]="form" (ngSubmit)="createQuestions()">
+  <div class="flexed">
+    <mat-form-field class="control">
+      <mat-label>subject</mat-label>
+      <mat-select
+        matInput
+        formControlName="subject"
+        #subjectInput
+        (valueChange)="appStore.setSubjectFilter(subjectInput.value)"
+      >
+        @for (item of appStore.subjects(); track $index) {
+        <mat-option [value]="item.name">{{ item.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="control">
+      <mat-label>book</mat-label>
+      <mat-select matInput formControlName="book">
+        @for (item of appStore.filteredBooks(); track $index) {
+        <mat-option [value]="item.name">{{ item.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="control">
+      <mat-label>topic</mat-label>
+      <mat-select matInput formControlName="topic">
+        @for (item of appStore.filteredTopics(); track $index) {
+        <mat-option [value]="item.name">{{ item.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="control">
+      <mat-label>qn number</mat-label>
+      <input matInput type="number" formControlName="choices" />
+    </mat-form-field>
+    <button type="submit" mat-fab>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</form>
+<div class="created">
+  <questions-list
+    [exam]="questions"
+    (onSelectOption)="selectChoice($event)"
+    class="questions"
+  />
+</div>
+<div class="flexed">
+  <button
+    mat-flat-button
+    (click)="createExam()"
+    [disabled]="questions.length == 0"
+  >
+    save exam question
+  </button>
+</div>
+}

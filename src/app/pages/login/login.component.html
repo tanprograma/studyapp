@@ -1,0 +1,23 @@
+<div class="content">
+  <form [formGroup]="form" (ngSubmit)="login()">
+    <mat-form-field class="control">
+      <mat-label>username or email</mat-label>
+      <input type="text" matInput formControlName="username" />
+    </mat-form-field>
+    <mat-form-field class="control">
+      <mat-label>password</mat-label>
+      @if (showPassword) {
+      <input type="text" matInput formControlName="password" />
+
+      }@else {
+      <input type="password" matInput formControlName="password" />
+      }
+      <mat-icon matSuffix (click)="toggleVisibility($event)">{{
+        showPassword ? "visibility off" : "visibility"
+      }}</mat-icon>
+    </mat-form-field>
+    <button mat-flat-button type="submit" [disabled]="form.invalid">
+      LOGIN
+    </button>
+  </form>
+</div>

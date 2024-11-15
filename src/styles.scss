@@ -1,83 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./app/styles/layout.scss";
 * {
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+
   margin: 0;
 }
 
-.component {
-  background-color: lightgrey;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 10px;
+html,
+body {
+  height: 100%;
 }
-ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-a {
-  text-decoration: none;
-}
-.link {
-  display: block;
-  width: 100%;
-  padding: 5px;
-  border-radius: 5px;
-}
-.link--margin {
-  margin: 10px;
-}
-.link:hover {
-  background-color: blue;
-  color: white;
-  cursor: pointer;
-}
-button {
-  border: 0;
-  height: 2rem;
-  min-width: 8rem;
-  margin: 5px;
-}
-.btn-basic:hover {
-  background-color: black;
-  color: white;
-}
-.btn-basic:disabled:hover {
-  cursor: not-allowed;
-}
-button:hover {
-  cursor: pointer;
-}
-.btn-round {
-  width: auto !important;
-  border-radius: 50%;
-  padding: 2px;
-}
-.btn--danger {
-  background-color: red;
-  color: white;
-}
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.sticky-top {
-  position: sticky;
-  top: 0;
-}
-// all main pages
-.page-main {
-  position: relative;
-}
-
-tbody tr:hover {
-  background-color: aqua;
-}
-table {
-  border-collapse: collapse;
-}
-td {
-  max-width: 26rem;
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

@@ -1,18 +1,14 @@
 import { Schema, model, Types } from "mongoose";
-interface INote {
-  value: string;
-  subjectID: Types.ObjectId;
-  subtopicID: Types.ObjectId;
-  topicID: Types.ObjectId;
-}
-const schema = new Schema<INote>(
+import { Note } from "../../src/app/interfaces/note";
+
+const schema = new Schema<Note>(
   {
-    topicID: { type: Schema.Types.ObjectId, ref: "Topic" },
-    subjectID: { type: Schema.Types.ObjectId, ref: "Subject" },
-    subtopicID: { type: Schema.Types.ObjectId, ref: "Subtopic" },
-    value: { type: String, lowercase: true },
+    author: String,
+    book: String,
+    topic: String,
+    title: String,
   },
   { timestamps: true }
 );
-const mymodel = model<INote>("Note", schema);
+const mymodel = model<Note>("Note", schema);
 export default mymodel;

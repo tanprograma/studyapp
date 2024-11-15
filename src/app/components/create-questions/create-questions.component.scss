@@ -1,0 +1,20 @@
+.subject-form,
+.created {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.control {
+  margin: 2px;
+  flex: 0 0 15%;
+}
+.flexed {
+  flex: 0 1 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.questions {
+  flex: 0 1 60%;
+}

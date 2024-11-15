@@ -1,33 +1,28 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpService } from './http.service';
-import { UrlService } from './url.service';
 import { Note } from '../interfaces/note';
-import { catchError } from 'rxjs';
+import { UrlService } from './url.service';
+import { NotesFilter } from '../store/note.store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NoteService {
-  http = inject(HttpService);
-  urls = inject(UrlService);
+  private $axios = inject(UrlService).$axios;
   constructor() {}
-  post(data: Note) {
-    const url = `${this.urls.NOTE_API}/create`;
-    return this.http
-      .post<Note>(url, data)
-      .pipe(catchError(this.http.handleError<Note | undefined>('todo post')));
+  async getNotes(author: string, { topic }: { topic: string }) {
+    const res = await this.$axios.get(`/notes?author=${author}&topic=${topic}`);
+    return res.data;
   }
-  get() {
-    const url = `${this.urls.NOTE_API}`;
-    return this.http
-      .get<Note[]>(url)
-      .pipe(catchError(this.http.handleError<Note[]>('notes fetch', [])));
+  async addNote(note: Partial<Note>[]): Promise<Note[]> {
+    const req = await this.$axios.post('/notes', note);
+    return req.data;
   }
-  getID(id: string) {
-    const url = `${this.urls.NOTE_API}/${id}`;
-
-    return this.http
-      .get<Note[]>(url)
-      .pipe(catchError(this.http.handleError<Note[]>('notes fetch', [])));
+  async deleteNote(id: string) {
+    const req = await this.$axios.delete(`/notes/${id}`);
+    return req.data;
+  }
+  async updateNote(id: string, payload: Partial<Note>) {
+    const req = await this.$axios.post(`/notes/${id}`, payload);
+    return req.data;
   }
 }

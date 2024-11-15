@@ -1,0 +1,29 @@
+.content {
+  width: 100%;
+}
+.subject-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.control {
+  width: 80%;
+  margin: 2px 10px;
+}
+// .control button {
+//   margin: 5px;
+// }
+.flexed {
+  display: flex;
+  //   border: 1px solid green;
+  flex-direction: row;
+}
+// .mr-auto {
+//   margin-right: auto;
+// }
+.ml-auto {
+  margin-left: auto;
+}
+.w-50 {
+  height: 30vh;
+}

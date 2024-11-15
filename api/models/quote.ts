@@ -1,11 +1,9 @@
 import { Schema, model } from 'mongoose';
-interface IQuote {
-  name: string;
-  author: string;
-}
-const schema = new Schema<IQuote>({
-  value: { type: String, lowercase: true },
-  author: { type: String, lowercase: true },
+import { Quote } from '../../src/app/interfaces/quote';
+
+const schema = new Schema<Quote>({
+  title: String,
+  author: String,
 });
-const mymodel = model<IQuote>('Quote', schema);
+const mymodel = model<Quote>('Quote', schema);
 export default mymodel;

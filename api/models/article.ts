@@ -1,18 +1,13 @@
 import { Schema, model } from 'mongoose';
-interface Content {
-  format: string;
-  composition: any;
-}
-interface IArticle {
-  title: string;
-  content: Content[];
-}
-const schema = new Schema<IArticle>(
+import { Article } from '../../src/app/interfaces/article';
+
+const schema = new Schema<Article>(
   {
-    title: { type: String },
-    content: [{ format: String, composition: {} }],
+    title: { main: String, sub: String },
+    content: String,
+    author: String,
   },
   { timestamps: true }
 );
-const mymodel = model<IArticle>('Article', schema);
+const mymodel = model<Article>('Article', schema);
 export default mymodel;

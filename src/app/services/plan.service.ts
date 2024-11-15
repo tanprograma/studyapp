@@ -1,32 +1,26 @@
 import { inject, Injectable } from '@angular/core';
 import { Plan } from '../interfaces/plan';
-import { catchError } from 'rxjs';
-import { HttpService } from './http.service';
 import { UrlService } from './url.service';
-
 @Injectable({
   providedIn: 'root',
 })
 export class PlanService {
-  http = inject(HttpService);
-  urls = inject(UrlService);
+  private $axios = inject(UrlService).$axios;
   constructor() {}
-  post(data: Plan) {
-    const url = `${this.urls.PLAN_API}/create`;
-    return this.http
-      .post<Plan>(url, data)
-      .pipe(catchError(this.http.handleError<Plan | undefined>('plan post')));
+  async getPlans(userid: string) {
+    const res = await this.$axios.get(`/plans/${userid}`);
+    return res.data;
   }
-  get() {
-    const url = `${this.urls.PLAN_API}`;
-    return this.http
-      .get<Plan[]>(url)
-      .pipe(catchError(this.http.handleError<Plan[]>('plans fetch', [])));
+  async addPlan(plan: Partial<Plan>): Promise<Plan> {
+    const req = await this.$axios.post('/plans', plan);
+    return req.data;
   }
-  complete(data: { _id: string }) {
-    const url = `${this.urls.PLAN_API}/complete`;
-    return this.http
-      .post<any>(url, data)
-      .pipe(catchError(this.http.handleError<Plan | undefined>('update plan')));
+  async deletePlan(id: string) {
+    const req = await this.$axios.delete(`/plans/${id}`);
+    return req.data;
+  }
+  async updatePlan(id: string, payload: Partial<Plan>) {
+    const req = await this.$axios.patch('/plans/id', payload);
+    return req.data;
   }
 }

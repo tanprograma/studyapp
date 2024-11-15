@@ -1,44 +1,31 @@
-import {
-  Component,
-  computed,
-  inject,
-  OnInit,
-  Signal,
-  signal,
-} from '@angular/core';
-import { Quote } from '../../interfaces/quote';
-import { QuoteService } from '../../services/quote.service';
-import { ReactiveFormsModule } from '@angular/forms';
-import { LoaderComponent } from '../../components/loader/loader.component';
-import { PromptConfirmComponent } from '../../components/prompt-confirm/prompt-confirm.component';
-
+import { Component, inject } from '@angular/core';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 @Component({
   selector: 'app-quotes',
   standalone: true,
-  imports: [PromptConfirmComponent],
+  imports: [
+    MatTabsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './quotes.component.html',
   styleUrl: './quotes.component.scss',
 })
-export class QuotesComponent implements OnInit {
-  quoteService = inject(QuoteService);
-  all_Items: Quote[] = [];
-  loading = false;
-  items: Quote[] = [];
-  ngOnInit(): void {
-    this.loading = true;
-    this.quoteService.get().subscribe((res) => {
-      this.all_Items = this.items = res;
-      this.loading = false;
-    });
-  }
-  search(e: Event) {
-    const target = e.target as HTMLInputElement;
-    if (target.value == '') {
-      this.items = this.all_Items;
-      return;
-    }
-    this.items = this.all_Items.filter((item) => {
-      return item.author.includes(target.value.toLowerCase());
-    });
+export class QuotesComponent {
+  formBuilder = inject(FormBuilder);
+  quoteForm = this.formBuilder.group({
+    title: ['', Validators.required],
+    author: [''],
+  });
+  onSubmit() {
+    console.log(this.quoteForm.value);
   }
 }

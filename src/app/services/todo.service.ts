@@ -1,31 +1,34 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Todo } from '../interfaces/todo';
-import { catchError, Subject, tap } from 'rxjs';
-import { HttpService } from './http.service';
 import { UrlService } from './url.service';
+import { isPlatformBrowser } from '@angular/common';
+
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
-  http = inject(HttpService);
-  urls = inject(UrlService);
+  platformID = inject(PLATFORM_ID);
+  private $axios = inject(UrlService).$axios;
   constructor() {}
-  post(data: Todo) {
-    const url = `${this.urls.TODO_API}/create`;
-    return this.http
-      .post<Todo>(url, data)
-      .pipe(catchError(this.http.handleError<Todo | undefined>('todo post')));
+  async getTodos() {
+    if (isPlatformBrowser(this.platformID)) {
+      const userID = JSON.stringify(sessionStorage.getItem('user') as string);
+      const res = await this.$axios.get(`/todos?user=${userID}`);
+      return res.data;
+    } else {
+      return [];
+    }
   }
-  get() {
-    const url = `${this.urls.TODO_API}`;
-    return this.http
-      .get<Todo[]>(url)
-      .pipe(catchError(this.http.handleError<Todo[]>('todos fetch', [])));
+  async addTodo(todo: Partial<Todo>): Promise<Todo> {
+    const req = await this.$axios.post('/todos', todo);
+    return req.data;
   }
-  complete(data: { _id: string }) {
-    const url = `${this.urls.TODO_API}/complete`;
-    return this.http
-      .post<any>(url, data)
-      .pipe(catchError(this.http.handleError<Todo | undefined>('update todo')));
+  async deleteTodo(id: string) {
+    const req = await this.$axios.delete(`/todos/${id}`);
+    return req.data;
+  }
+  async updateTodo(id: string, payload: Partial<Todo>) {
+    const req = await this.$axios.patch('/todos/id', payload);
+    return req.data;
   }
 }

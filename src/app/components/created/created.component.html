@@ -1,0 +1,18 @@
+@if(items.length>0){
+<mat-list class="item-list">
+  @for (item of items; track $index) {
+  <mat-list-item role="listitem" class="item">
+    <span class="id">{{ item._id }}</span>
+    <span class="spaced">{{ item.item }}</span>
+    <mat-icon
+      class="delete-icon"
+      matListItemIcon
+      (click)="deleteItem($event, item._id)"
+      >delete</mat-icon
+    >
+  </mat-list-item>
+  }
+</mat-list>
+}@else {
+<div>nothing to show.. create more items</div>
+}

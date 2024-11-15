@@ -1,11 +1,9 @@
 import { Schema, model, Types } from "mongoose";
-interface ITopic {
-  name: string;
-  subjectID: Types.ObjectId;
-}
-const schema = new Schema<ITopic>({
+import { Topic } from "../../src/app/interfaces/topic";
+
+const schema = new Schema<Topic>({
+  subject: String,
   name: { type: String, lowercase: true },
-  subjectID: { type: Schema.Types.ObjectId, ref: "Subject" },
 });
-const mymodel = model<ITopic>("Topic", schema);
+const mymodel = model<Topic>("Topic", schema);
 export default mymodel;

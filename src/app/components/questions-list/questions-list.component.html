@@ -1,0 +1,7 @@
+<div class="qn-list">
+  @for (question of exam; track $index) {
+
+  <question [item]="question" (onSelectOption)="selectOption($event)" />
+
+  }
+</div>

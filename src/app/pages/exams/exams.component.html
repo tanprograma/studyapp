@@ -1,0 +1,28 @@
+<div class="content">
+  <h1>EXAMS & TESTS</h1>
+  <reloader
+    [items]="store.exams().length"
+    (onClick)="getExamPreview()"
+  ></reloader>
+  <div class="exams">
+    @for (exam of store.exams(); track $index) {
+    <div class="exam">
+      <div class="description flex-20">
+        <span class="label">book</span>
+        <span>{{ exam.book }}</span>
+      </div>
+      <div class="description flex-20">
+        <span class="label">topic</span>
+        <span>{{ exam.topic }}</span>
+      </div>
+      <div class="description flex-15">
+        <span class="label">questions</span>
+        <span>{{ exam.questions }}</span>
+      </div>
+      <div class="ml-auto">
+        <a mat-raised-button [routerLink]="['/exams', exam._id]">TAKE TEST</a>
+      </div>
+    </div>
+    }
+  </div>
+</div>

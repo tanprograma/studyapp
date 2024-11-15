@@ -1,5 +1,5 @@
-export interface Topic {
+export type Topic = {
+  _id: string;
   name: string;
-  subjectID: string;
-  _id?: string;
-}
+  subject: string;
+};

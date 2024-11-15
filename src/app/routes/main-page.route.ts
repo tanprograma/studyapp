@@ -1,28 +1,25 @@
 import { Routes } from '@angular/router';
-import { MainComponent } from '../pages/main/main.component';
-import { LoginPageComponent } from '../pages/login-page/login-page.component';
-import { NotesPageComponent } from '../pages/notes-page/notes-page.component';
+import { LoginComponent } from '../pages/login/login.component';
+import { NotesComponent } from '../pages/notes/notes.component';
 import { QuotesComponent } from '../pages/quotes/quotes.component';
 import { QuestionsComponent } from '../pages/questions/questions.component';
-import { CreateQuotesComponent } from '../pages/create-quotes/create-quotes.component';
-import { CreateNotesComponent } from '../pages/create-notes/create-notes.component';
-import { CreateQuestionsComponent } from '../pages/create-questions/create-questions.component';
-import { CreateSubjectComponent } from '../pages/create-subject/create-subject.component';
+import { TodoComponent } from '../pages/todo/todo.component';
+import { ArticlesComponent } from '../pages/articles/articles.component';
+import { ProjectsComponent } from '../pages/projects/projects.component';
+import { PlansComponent } from '../pages/plans/plans.component';
+import { AdminComponent } from '../pages/admin/admin.component';
 const route: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  {
-    path: '',
-    component: MainComponent,
-    children: [
-      { path: ':userid/notes', component: NotesPageComponent },
-      { path: ':userid/quotes', component: QuotesComponent },
-      { path: ':userid/questions', component: QuestionsComponent },
-      { path: ':userid/create-quotes', component: CreateQuotesComponent },
-      { path: ':userid/create-notes', component: CreateNotesComponent },
-      { path: ':userid/create-questions', component: CreateQuestionsComponent },
-      { path: ':userid/create-subjects', component: CreateSubjectComponent },
-      { path: 'login', component: LoginPageComponent },
-    ],
-  },
+  { path: '', redirectTo: '/todos', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'notes', component: NotesComponent },
+  { path: 'quotes', component: QuotesComponent },
+  { path: 'questions', component: QuestionsComponent },
+  { path: 'todos', component: TodoComponent },
+  { path: 'articles', component: ArticlesComponent },
+  { path: 'projects', component: ProjectsComponent },
+  { path: 'plans', component: PlansComponent },
+  { path: 'admin', component: AdminComponent },
+  // { path: ':userid/create-questions', component: CreateQuestionsComponent },
+  // { path: ':userid/create-subjects', component: CreateSubjectComponent },
 ];
 export default route;

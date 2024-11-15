@@ -1,0 +1,76 @@
+.content {
+  height: 100%;
+  position: relative;
+  overflow-y: scroll;
+}
+h1 {
+  background-color: black;
+  color: white;
+  position: sticky;
+  top: 0;
+  text-align: center;
+}
+.exam {
+  display: flex;
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  border: 1px solid lightgrey;
+}
+span {
+  padding: 5px;
+}
+.description {
+  display: flex;
+  flex-direction: column;
+}
+.label {
+  font-size: 0.9em;
+  color: rgb(217, 194, 194);
+}
+.flex-10 {
+  flex: 0 0 10%;
+}
+.flex-15 {
+  flex: 0 0 15%;
+}
+.flex-20 {
+  flex: 0 0 20%;
+}
+.flex-30 {
+  flex: 0 0 30%;
+}
+.ml-auto {
+  margin-left: auto;
+}
+.ml-right {
+  margin-right: auto;
+}
+.date {
+  background-color: black;
+  color: white;
+  margin-right: 5px;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  background-color: rgb(201, 201, 244);
+}
+.component {
+  display: flex;
+  justify-content: center;
+}
+.notes {
+  display: flex;
+  flex-direction: column;
+
+  padding: 10px 100px;
+}
+.note {
+  margin: 10px 2px;
+}
+.control {
+  margin: 0 10px;
+}

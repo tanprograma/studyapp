@@ -2,34 +2,38 @@ import express from 'express';
 import TodoModel from '../models/todo';
 const router = express.Router();
 router.get('/', async (req, res) => {
-  const todos = await TodoModel.find();
+  const todos = await TodoModel.find(req.query);
   res.send(todos);
 });
-router.get('/:createdAt', async (req, res) => {
-  const createdAt = new Date(req.params.createdAt).toISOString();
 
-  const todos = await TodoModel.find().where({ createdAt: createdAt });
-
-  res.send(todos);
-});
-router.post('/create', async (req, res) => {
+router.post('/', async (req, res) => {
   const todo = req.body;
   const result = await TodoModel.create(todo);
   res.send(result);
 });
-router.post('/complete', async (req, res) => {
-  const _id = req.body._id;
-  const original = await TodoModel.findOne({ _id });
-  let result;
-  if (original != null) {
-    original.completed = true;
-    result = await original.save();
+router.delete('/:id', async (req, res) => {
+  // delete todo
+  try {
+    const todo = req.params.id;
+    const result = await TodoModel.findOneAndDelete({ _id: todo });
+    res.send(true);
+  } catch (error) {
+    res.send(false);
   }
-  res.send(result);
 });
-router.post('/createmany', async (req, res) => {
-  const todos = req.body;
-  const result = await TodoModel.create(todos);
-  res.send(result);
+// patches the record
+router.patch('/:id', async (req, res) => {
+  const id = req.params.id;
+  const completed = req.body.completed as boolean;
+  const original = await TodoModel.findOne({ _id: id });
+
+  if (!!original) {
+    original.completed = completed;
+    await original.save();
+    res.send(true);
+  } else {
+    res.send(false);
+  }
 });
+
 export default router;

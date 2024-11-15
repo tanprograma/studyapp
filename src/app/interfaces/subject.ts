@@ -1,4 +1,4 @@
-export interface Subject {
+export type Subject = {
+  _id: string;
   name: string;
-  _id?: string;
-}
+};

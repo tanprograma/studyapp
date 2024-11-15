@@ -1,18 +1,44 @@
-@import "../../styles/create.scss";
-ul {
-  padding: 10px;
-}
-li {
-  padding: 10px;
-  border-radius: 5px;
-  background-color: white;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-.page {
+// .content {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   height: 100%;
+//   position: relative;
+//   overflow-y: scroll;
+//   overflow-x: hidden;
+// }
+.content {
+  //   display: flex;
+  //   flex-direction: column;
+  align-items: center;
+  height: 100%;
   position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
-.page__heading {
+h1 {
   position: sticky;
   top: 0;
+  background-color: black;
+  color: white;
+  z-index: 1;
+  width: 100vw;
+  text-align: center;
+}
+.create-quotes {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  padding: 10px;
+}
+@media (min-width: 900px) {
+  .control {
+    width: 30%;
+  }
+}
+@media (min-width: 650px) and (max-width: 890px) {
+  .control {
+    width: 90%;
+  }
 }

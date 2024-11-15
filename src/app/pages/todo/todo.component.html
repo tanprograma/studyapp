@@ -1,35 +1,15 @@
-<div class="create-container page">
-  <div class="component flex-center page__heading">TODOS</div>
-  @if(!loading){
-  <div class="component flex">
-    <div class="searchbox-container">
-      <input class="searchbox" type="date" (change)="search($event)" />
-    </div>
-    <button class="all" (click)="getAll()">ALL</button>
-  </div>
-  @if(items.length>0){
-  <div class="component flex-center">TODOS({{ items.length }} )</div>
-  <div class="component">
-    <!-- fetched notes will display -->
+<div class="content">
+  <h1>TODO'S</h1>
 
-    <ul>
-      @for (item of items; track $index) {
-      <li>
-        <div class="complete-container">
-          @if(item.completed==false){
-          <button class="complete" (click)="complete(item._id)">
-            COMPLETE
-          </button>
-          }@else if(item.completed==true){
-          <button class="completed">COMPLETED</button>
-          }
-        </div>
-        {{ item.value }}
-      </li>
-      }
-    </ul>
-  </div>
-  } }@else if (loading) {
-  <prompt-confirm />
+  @if (!store.loading()) {
+  <mat-button-toggle-group>
+    <mat-button-toggle value="all">all</mat-button-toggle>
+    <mat-button-toggle value="pending">pending</mat-button-toggle>
+    <mat-button-toggle value="completed">completed</mat-button-toggle>
+  </mat-button-toggle-group>
+  <todo-list [items]="store.filteredTodos()" (onUpdate)="updateList($event)" />
+
+  }@else {
+  <mat-spinner></mat-spinner>
   }
 </div>

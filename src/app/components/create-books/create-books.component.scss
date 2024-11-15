@@ -1,0 +1,17 @@
+.subject-form,
+.created {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.control-subject {
+  flex: 0 1 20%;
+  margin-right: 10px;
+}
+.control {
+  flex: 0 1 50%;
+}
+.content {
+  height: 100%;
+  overflow-y: scroll;
+}
