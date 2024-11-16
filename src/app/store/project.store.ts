@@ -40,8 +40,8 @@ export const PROJECT_STORE = signalStore(
     }),
   })),
   withMethods((store, projectService = inject(ProjectService)) => ({
-    async getProjects(id: string) {
-      const projects = await projectService.getProjects(id);
+    async getProjects() {
+      const projects = await projectService.getProjects();
       patchState(store, { projects: projects });
     },
     async addProject(payload: Partial<Project>) {
@@ -71,6 +71,20 @@ export const PROJECT_STORE = signalStore(
         ),
         loading: false,
       }));
+    },
+    async toggleProject(id: string) {
+      patchState(store, { loading: true });
+      const res = await projectService.toggleProject(id);
+      if (res) {
+        patchState(store, ({ projects }) => ({
+          projects: projects.map((project) =>
+            project._id == id ? res : project
+          ),
+          loading: false,
+        }));
+      } else {
+        patchState(store, { loading: false });
+      }
     },
     filterProjects(filter: 'all' | 'pending' | 'completed') {
       patchState(store, { filter: filter });

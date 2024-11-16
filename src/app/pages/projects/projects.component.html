@@ -1,25 +1,18 @@
 <div class="content">
   <h1>PROJECTS</h1>
-  <mat-form-field name="todo" class="todo-input">
-    <mat-label>write a project and press enter</mat-label>
-    <input matInput #input (keyup.enter)="addProject(input.value)" />
-
-    <mat-icon matTextSuffix>edit</mat-icon>
-  </mat-form-field>
-  <div class="component">
-    <mat-button-toggle-group #filter (change)="onFilterProject($event)">
-      <mat-button-toggle value="all">all</mat-button-toggle>
-      <mat-button-toggle value="pending">pending</mat-button-toggle>
-      <mat-button-toggle value="completed">completed</mat-button-toggle>
-    </mat-button-toggle-group>
-  </div>
+  <mat-button-toggle-group #filter>
+    <mat-button-toggle value="all">all</mat-button-toggle>
+    <mat-button-toggle value="pending">pending</mat-button-toggle>
+    <mat-button-toggle value="completed">completed</mat-button-toggle>
+  </mat-button-toggle-group>
   @if (!store.loading()) {
+
   <todo-list
     [items]="store.filteredProjects()"
     (onUpdate)="updateList($event)"
   />
 
   }@else {
-  <mat-spinner></mat-spinner>
+  <load-indicator [message]="'processing request'"></load-indicator>
   }
 </div>

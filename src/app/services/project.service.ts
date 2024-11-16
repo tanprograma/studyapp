@@ -7,8 +7,8 @@ import { UrlService } from './url.service';
 export class ProjectService {
   private $axios = inject(UrlService).$axios;
   constructor() {}
-  async getProjects(userid: string) {
-    const res = await this.$axios.get(`/projects/${userid}`);
+  async getProjects() {
+    const res = await this.$axios.get(`/projects`);
     return res.data;
   }
   async addProject(project: Partial<Project>): Promise<Project> {
@@ -20,7 +20,11 @@ export class ProjectService {
     return req.data;
   }
   async updateProject(id: string, payload: Partial<Project>) {
-    const req = await this.$axios.patch(`/projects/${id}`, payload);
+    const req = await this.$axios.put(`/projects/${id}`, payload);
+    return req.data;
+  }
+  async toggleProject(id: string) {
+    const req = await this.$axios.patch(`/projects/${id}`);
     return req.data;
   }
 }

@@ -21,6 +21,8 @@ import { PLAN_STORE } from '../../store/plan.store';
 import { USER_STATE } from '../../store/user.store';
 import { User } from '../../interfaces/user';
 import { Action } from '../../interfaces/action';
+import { LoadIndicatorComponent } from '../../components/load-indicator/load-indicator.component';
+import { TODO_STORE } from '../../store/todo.store';
 @Component({
   selector: 'app-plans',
   standalone: true,
@@ -33,14 +35,15 @@ import { Action } from '../../interfaces/action';
     MatListModule,
     MatProgressSpinnerModule,
     TodoListComponent,
+    LoadIndicatorComponent,
   ],
-  providers: [PLAN_STORE],
+  providers: [],
   templateUrl: './plans.component.html',
   styleUrl: './plans.component.scss',
 })
 export class PlansComponent {
   store = inject(PLAN_STORE);
-  userState = inject(USER_STATE);
+
   filter = viewChild.required(MatButtonToggleGroup);
   constructor() {
     effect(() => {
@@ -49,19 +52,11 @@ export class PlansComponent {
     });
   }
   ngOnInit(): void {
-    this.getPlans().then((res) => {
-      console.log('loaded Plans');
+    this.store.getPlans().then((res) => {
+      console.log('loaded plans');
     });
   }
-  async getPlans() {
-    await this.store.getPlans(this.getUserID());
-  }
-  async onAddPlan(title: string) {
-    await this.store.addPlan({ title, author: this.getUserID() });
-  }
-  getUserID() {
-    return (this.userState.user() as User)._id;
-  }
+
   async updateList(action: Action) {
     switch (action.type) {
       case 'delete':
@@ -69,29 +64,16 @@ export class PlansComponent {
         break;
 
       case 'update':
-        await this.store.updatePlan(action.payload.id as string, {
-          title: action.payload.title as string,
-        });
+        await this.store.togglePlan(action.payload.id as string);
         break;
 
       default:
         break;
     }
   }
-  onFilterPlan(filter: MatButtonToggleChange) {
-    const value = filter.value as 'all' | 'completed' | 'pending';
+  onFilterTodo(filter: MatButtonToggleChange) {
+    const value = filter.value as 'all' | 'pending' | 'completed';
 
     this.store.filterPlans(value);
   }
-  // async onDeletePlan(event: MouseEvent, id?: string) {
-  //   event.stopPropagation();
-  //   await this.store.deletePlan(id);
-  // }
-
-  // async updatePlan(completed: boolean, id: string) {
-
-  //   // console.log({ completed, id });
-  //   // console.log(this.store.Plans());
-  //   await this.store.updatePlan(completed, id);
-  // }
 }

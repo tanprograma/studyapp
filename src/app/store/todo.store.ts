@@ -91,6 +91,8 @@ export const TODO_STORE = signalStore(
             ),
             loading: false,
           }));
+        } else {
+          patchState(store, { loading: false });
         }
       },
       filterTodos(filter: 'all' | 'pending' | 'completed') {

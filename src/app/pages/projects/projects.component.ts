@@ -15,6 +15,7 @@ import { PROJECT_STORE } from '../../store/project.store';
 import { USER_STATE } from '../../store/user.store';
 import { User } from '../../interfaces/user';
 import { Action } from '../../interfaces/action';
+import { LoadIndicatorComponent } from '../../components/load-indicator/load-indicator.component';
 
 @Component({
   selector: 'app-projects',
@@ -26,14 +27,15 @@ import { Action } from '../../interfaces/action';
     MatButtonToggle,
     MatProgressSpinner,
     MatInputModule,
+    LoadIndicatorComponent,
   ],
-  providers: [PROJECT_STORE],
+  providers: [],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
 })
 export class ProjectsComponent {
   store = inject(PROJECT_STORE);
-  userState = inject(USER_STATE);
+
   filter = viewChild.required(MatButtonToggleGroup);
   constructor() {
     effect(() => {
@@ -42,19 +44,11 @@ export class ProjectsComponent {
     });
   }
   ngOnInit(): void {
-    this.getPlans().then((res) => {
-      console.log('loaded Plans');
+    this.store.getProjects().then((res) => {
+      console.log('loaded todos');
     });
   }
-  async getPlans() {
-    await this.store.getProjects(this.getUserID());
-  }
-  async addProject(title: string) {
-    await this.store.addProject({ title, author: this.getUserID() });
-  }
-  getUserID() {
-    return (this.userState.user() as User)._id;
-  }
+
   async updateList(action: Action) {
     switch (action.type) {
       case 'delete':
@@ -62,17 +56,15 @@ export class ProjectsComponent {
         break;
 
       case 'update':
-        await this.store.updateProject(action.payload.id as string, {
-          title: action.payload.title as string,
-        });
+        await this.store.toggleProject(action.payload.id as string);
         break;
 
       default:
         break;
     }
   }
-  onFilterProject(filter: MatButtonToggleChange) {
-    const value = filter.value as 'all' | 'completed' | 'pending';
+  onFilterTodo(filter: MatButtonToggleChange) {
+    const value = filter.value as 'all' | 'pending' | 'completed';
 
     this.store.filterProjects(value);
   }

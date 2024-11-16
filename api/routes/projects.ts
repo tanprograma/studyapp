@@ -21,12 +21,24 @@ router.delete('/:id', async (req, res) => {
   }
 });
 // patches the record
-router.patch('/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   const id = req.body._id;
   const original = await ProjectModel.findOne({ _id: id });
 
   if (!!original) {
     original.completed = true;
+    await original.save();
+    res.send(true);
+  } else {
+    res.send(false);
+  }
+});
+router.patch('/:id', async (req, res) => {
+  const id = req.body._id;
+  const original = await ProjectModel.findOne({ _id: id });
+
+  if (!!original) {
+    original.completed = !original.completed;
     await original.save();
     res.send(true);
   } else {

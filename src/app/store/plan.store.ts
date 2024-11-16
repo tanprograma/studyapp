@@ -39,8 +39,8 @@ export const PLAN_STORE = signalStore(
     }),
   })),
   withMethods((store, planService = inject(PlanService)) => ({
-    async getPlans(id: string) {
-      const plans = await planService.getPlans(id);
+    async getPlans() {
+      const plans = await planService.getPlans();
       patchState(store, { plans: plans });
     },
     async addPlan(payload: Partial<Plan>) {
@@ -71,6 +71,18 @@ export const PLAN_STORE = signalStore(
     },
     filterPlans(filter: 'all' | 'pending' | 'completed') {
       patchState(store, { filter: filter });
+    },
+    async togglePlan(id: string) {
+      patchState(store, { loading: true });
+      const res = await planService.togglePlan(id);
+      if (res) {
+        patchState(store, ({ plans }) => ({
+          plans: plans.map((plan) => (plan._id == id ? res : plan)),
+          loading: false,
+        }));
+      } else {
+        patchState(store, { loading: false });
+      }
     },
   }))
 );
