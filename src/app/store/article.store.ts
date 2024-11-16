@@ -1,9 +1,16 @@
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withComputed,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
 import { Article } from '../interfaces/article';
 import { ArticleService } from '../services/article.service';
-import { inject } from '@angular/core';
+import { computed, inject } from '@angular/core';
 type ArticleStoreState = {
   articles: Pick<Article, '_id' | 'title' | 'createdAt'>[];
+
   article: Article | null;
   loading: boolean;
   initialized: boolean;
@@ -17,13 +24,19 @@ const initialState: ArticleStoreState = {
 export const ARTICLE_STORE = signalStore(
   { providedIn: 'root' },
   withState(initialState),
+  withComputed((store) => ({
+    totalArticles: computed(() => {
+      return store.articles().length;
+    }),
+  })),
   withMethods((store, articleService = inject(ArticleService)) => ({
     initializeStore() {
       patchState(store, { initialized: true });
     },
     async articlePreviews() {
-      const articles = await articleService.articlePreviews();
+      const articles = await articleService.getArticlePreviews();
       if (articles.length == 0) return;
+
       patchState(store, { articles: articles });
     },
     async getArticle(id: string) {

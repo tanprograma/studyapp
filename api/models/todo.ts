@@ -3,6 +3,7 @@ import { Todo } from '../../src/app/interfaces/todo';
 
 const schema = new Schema<Todo>(
   {
+    // author:String,
     title: { type: String, lowercase: true },
     completed: { type: Boolean, default: () => false },
   },

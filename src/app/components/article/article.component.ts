@@ -5,7 +5,7 @@ import { JsonPipe } from '@angular/common';
 @Component({
   selector: 'article',
   standalone: true,
-  imports: [JsonPipe],
+  imports: [],
   templateUrl: './article.component.html',
   styleUrl: './article.component.scss',
   encapsulation: ViewEncapsulation.None,

@@ -63,13 +63,23 @@ a:hover {
   justify-content: center;
 }
 .notes {
-  display: flex;
-  flex-direction: column;
+  width: 80%;
+  margin: 10px auto;
 
-  padding: 10px 100px;
+  padding: 10px;
 }
 .note {
   margin: 10px 2px;
+  display: flex;
+}
+.note-decoration {
+  flex: 0 0 10px;
+  background-color: black;
+}
+.note-title {
+  flex: 1 1 auto;
+  margin-left: auto;
+  border-left: 5px solid black;
 }
 .control {
   margin: 0 10px;

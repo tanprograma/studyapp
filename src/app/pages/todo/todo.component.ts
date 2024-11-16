@@ -31,6 +31,7 @@ import {
 import { Action } from '../../interfaces/action';
 import { FilterQuery } from 'mongoose';
 import { TODO_STORE } from '../../store/todo.store';
+import { LoadIndicatorComponent } from '../../components/load-indicator/load-indicator.component';
 
 @Component({
   selector: 'app-todo',
@@ -44,6 +45,7 @@ import { TODO_STORE } from '../../store/todo.store';
     MatListModule,
     MatProgressSpinnerModule,
     TodoListComponent,
+    LoadIndicatorComponent,
   ],
   providers: [TODO_STORE],
   templateUrl: './todo.component.html',
@@ -73,10 +75,7 @@ export class TodoComponent implements OnInit {
         break;
 
       case 'update':
-        await this.store.updateTodo(
-          action.payload.id as string,
-          action.payload.completed
-        );
+        await this.store.toggleTodo(action.payload.id as string);
         break;
 
       default:

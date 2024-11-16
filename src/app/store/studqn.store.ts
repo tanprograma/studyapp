@@ -35,14 +35,10 @@ export const STUDY_STORE = signalStore(
         patchState(store, { initialized: true });
       },
 
-      async getQuestions(topic: { topic: string }) {
-        appStore.setLoadState(true);
-        const questions = await studyService.getStudyQuestions(
-          appStore.user()?._id as string,
-          topic
-        );
-        patchState(store, { studyQuestions: questions });
-        appStore.setLoadState(false);
+      async getQuestions(query: { topic: string }) {
+        patchState(store, { loading: true });
+        const questions = await studyService.getStudyQuestions(query);
+        patchState(store, { studyQuestions: questions, loading: false });
       },
       async addQuestion(payload: Partial<StudyQuestion>[]) {
         patchState(store, { loading: true });

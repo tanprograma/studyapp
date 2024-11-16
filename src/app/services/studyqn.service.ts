@@ -8,8 +8,8 @@ import { UrlService } from './url.service';
 export class StudyqnService {
   private $axios = inject(UrlService).$axios;
   constructor() {}
-  async getStudyQuestions(author: string, { topic }: { topic: string }) {
-    const res = await this.$axios.get(`/study?author=${author}&topic=${topic}`);
+  async getStudyQuestions({ topic }: { topic: string }) {
+    const res = await this.$axios.get(`/study?topic=${topic}`);
     return res.data;
   }
   async addStudyQuestion(

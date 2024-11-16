@@ -9,7 +9,7 @@ export class ArticleService {
   $axios = inject(UrlService).$axios;
 
   constructor() {}
-  async articlePreviews(): Promise<
+  async getArticlePreviews(): Promise<
     Pick<Article, '_id' | 'title' | 'createdAt'>[]
   > {
     const res = await this.$axios.get('/articles/preview');
@@ -17,6 +17,10 @@ export class ArticleService {
   }
   async getArticle(id: string): Promise<Article> {
     const res = await this.$axios.get(`/articles/${id}`);
+    return res.data;
+  }
+  async getLatestArticle() {
+    const res = await this.$axios.get(`/articles/latest`);
     return res.data;
   }
   async addArticle(payload: Partial<Article>): Promise<Article> {

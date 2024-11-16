@@ -29,11 +29,17 @@
       <mat-icon>search</mat-icon>
     </button>
   </form>
+  @if (store.studyQuestions().length==0) {
+  <div class="notes">nothing to show</div>
+  }@else {
   <div class="notes">
     @for (item of store.studyQuestions(); track $index) {
     <div class="note">
-      {{ item.title }}
+      <span class="note-title">
+        {{ item.title }}
+      </span>
     </div>
     }
   </div>
+  }
 </div>

@@ -5,7 +5,7 @@ const schema = new Schema<StudyQuestion>({
   subject: String,
   topic: String,
   title: String,
-  author: String,
+  //   author: String,
 });
 const mymodel = model<StudyQuestion>('Studyquestion', schema);
 export default mymodel;

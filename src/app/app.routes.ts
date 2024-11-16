@@ -16,7 +16,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { StudyQuestionsComponent } from './pages/study-questions/study-questions.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/admin', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'notes', component: NotesComponent },
   { path: 'quotes', component: QuotesComponent },

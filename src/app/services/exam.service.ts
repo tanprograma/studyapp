@@ -18,7 +18,7 @@ export class ExamService {
     return res.data;
   }
   async getExam(id: string) {
-    const res = await this.$axios.get(`/exams/${id}`);
+    const res = await this.$axios.get(`/exams/exam/${id}`);
     return res.data;
   }
   async createExam(payload: Partial<Exam>): Promise<Exam> {
@@ -27,11 +27,14 @@ export class ExamService {
   }
 
   async saveExamResults(payload: Partial<ExamResult>): Promise<ExamResult> {
-    const isUser = this.userService.isLoggedIn() as string;
     const user = await this.$axios.post('/exam-results', {
       ...payload,
-      user: JSON.parse(isUser)._id as string,
     });
+    return user.data;
+  }
+  async getExamResults(id: string): Promise<ExamResult> {
+    const isUser = this.userService.isLoggedIn() as string;
+    const user = await this.$axios.get(`/exam-results/result${id}`);
     return user.data;
   }
 }

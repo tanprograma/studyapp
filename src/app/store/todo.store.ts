@@ -51,10 +51,9 @@ export const TODO_STORE = signalStore(
       appStore = inject(APP_STATE)
     ) => ({
       async getTodos() {
-        appStore.setLoadState(true);
+        patchState(store, { loading: true });
         const todos = await todoService.getTodos();
-        patchState(store, { todos: todos });
-        appStore.setLoadState(false);
+        patchState(store, { todos: todos, loading: false });
       },
       async addTodo(payload: Partial<Todo>) {
         patchState(store, { loading: true });
@@ -81,6 +80,18 @@ export const TODO_STORE = signalStore(
           todos: todos.map((todo) => (todo._id == id ? res : todo)),
           loading: false,
         }));
+      },
+      async toggleTodo(id: string) {
+        patchState(store, { loading: true });
+        const res = await todoService.toggleTodo(id);
+        if (res) {
+          patchState(store, ({ todos }) => ({
+            todos: todos.map((todo) =>
+              todo._id == id ? { ...todo, completed: !todo.completed } : todo
+            ),
+            loading: false,
+          }));
+        }
       },
       filterTodos(filter: 'all' | 'pending' | 'completed') {
         patchState(store, { filter: filter });

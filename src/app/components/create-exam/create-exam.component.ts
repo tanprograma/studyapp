@@ -14,6 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { EXAM_STORE } from '../../store/exam.store';
 import { UrlService } from '../../services/url.service';
 import { APP_STATE } from '../../store/app.store';
+import { LoadIndicatorComponent } from '../load-indicator/load-indicator.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   selector: 'create-exam',
@@ -28,6 +30,8 @@ import { APP_STATE } from '../../store/app.store';
     QuestionMarkComponent,
     MatButtonModule,
     RouterLink,
+    LoadIndicatorComponent,
+    MatTabsModule,
   ],
   templateUrl: './create-exam.component.html',
   styleUrl: './create-exam.component.scss',
@@ -42,6 +46,7 @@ export class CreateExamComponent implements OnInit {
     choices: [0, Validators.required],
   });
   store = inject(EXAM_STORE);
+  complete: boolean = false;
 
   ngOnInit(): void {
     this.getExam().then((res) => console.log('gotten exams'));
@@ -49,11 +54,13 @@ export class CreateExamComponent implements OnInit {
   async getExam() {
     const id = this.route.snapshot.paramMap.get('id');
 
-    if (!!id) {
-      this.appStore.setLoadState(true);
-      await this.store.getExam(id);
-      this.appStore.setLoadState(false);
-    }
+    // if (!!id) {
+    //   this.appStore.setLoadState(true);
+    //   await this.store.getExam(id);
+    //   this.appStore.setLoadState(false);
+    // }
+
+    await this.store.getExam(id as string);
   }
 
   selectChoice(choice: Pick<Choice, 'option' | 'sn'>) {
@@ -61,7 +68,7 @@ export class CreateExamComponent implements OnInit {
   }
 
   mark() {
-    this.markView = true;
+    this.complete = true;
   }
 
   async saveExam() {

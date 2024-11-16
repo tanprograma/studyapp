@@ -12,19 +12,18 @@ import { LoadIndicatorComponent } from '../load-indicator/load-indicator.compone
   styleUrl: './boot.component.scss',
 })
 export class BootComponent {
-  appState = inject(APP_STATE);
-  message = 'loading resources';
-  router = inject(Router);
-  constructor() {}
-  ngOnInit(): void {
-    this.getResources().then(() => {
-      console.log('data initialized');
-
-      this.router.navigate(['/admin']);
-    });
-  }
-  async getResources() {
-    this.appState.setState(true);
-    await this.appState.initializeData();
-  }
+  // appState = inject(APP_STATE);
+  // message = 'loading resources';
+  // router = inject(Router);
+  // constructor() {}
+  // ngOnInit(): void {
+  //   this.getResources().then(() => {
+  //     console.log('data initialized');
+  //     this.router.navigate(['/admin']);
+  //   });
+  // }
+  // async getResources() {
+  //   this.appState.setState(true);
+  //   await this.appState.initializeData();
+  // }
 }

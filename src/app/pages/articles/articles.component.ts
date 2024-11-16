@@ -6,11 +6,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { APP_STATE } from '../../store/app.store';
 import { MatIconModule } from '@angular/material/icon';
 import { ReloaderComponent } from '../../components/reloader/reloader.component';
+import { LoadIndicatorComponent } from '../../components/load-indicator/load-indicator.component';
 
 @Component({
   selector: 'app-articles',
   standalone: true,
-  imports: [RouterLink, MatButtonModule, MatIconModule, ReloaderComponent],
+  imports: [
+    RouterLink,
+    MatButtonModule,
+    MatIconModule,
+    ReloaderComponent,
+    LoadIndicatorComponent,
+  ],
   templateUrl: './articles.component.html',
   styleUrl: './articles.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,11 +25,13 @@ import { ReloaderComponent } from '../../components/reloader/reloader.component'
 export class ArticlesComponent {
   store = inject(ARTICLE_STORE);
   appState = inject(APP_STATE);
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('running articles');
+    this.getArticles().then((res) => console.log('fetched articles'));
+  }
 
   async getArticles() {
-    this.appState.setLoadState(true);
     await this.store.articlePreviews();
-    this.appState.setLoadState(false);
   }
+  async getLatestArticle() {}
 }

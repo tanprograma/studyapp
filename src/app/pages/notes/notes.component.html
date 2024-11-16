@@ -30,10 +30,12 @@
     </button>
   </form>
   <div class="notes">
-    @for (item of store.notes(); track $index) {
+    @if(store.loading()){
+    <load-indicator [message]="'processing request'"></load-indicator>
+    }@else { @for (item of store.notes(); track $index) {
     <div class="note">
       {{ item.title }}
     </div>
-    }
+    } }
   </div>
 </div>

@@ -1,7 +1,6 @@
 <div class="app">
   <div class="app-toolbar">
     <mat-toolbar>
-      @if (appState.loggedIn()) {
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>menu</mat-icon>
       </button>
@@ -19,17 +18,44 @@
           }
         </mat-nav-list>
       </mat-menu>
-      }
+
+      <!-- @if (appState.loggedIn()) {
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <mat-nav-list>
+          @for(link of links;track link){
+          <mat-list-item>
+            <a
+              class="menu-link"
+              [routerLink]="link.url"
+              routerLinkActive="active-link"
+              >{{ link.name }}</a
+            >
+          </mat-list-item>
+          }
+        </mat-nav-list>
+      </mat-menu>
+      } -->
 
       <span>KISOMO</span>
-      @if (appState.loggedIn()) {
+
+      <button class="clear-left" mat-mini-fab (click)="appState.configApp()">
+        <mat-icon>restart_alt</mat-icon>
+      </button>
+      <!-- <button class="header-action" mat-mini-fab (click)="logOut()">
+        <mat-icon>logout</mat-icon>
+      </button> -->
+
+      <!-- @if (appState.loggedIn()) {
       <button class="clear-left" mat-mini-fab (click)="reloadData()">
         <mat-icon>restart_alt</mat-icon>
       </button>
       <button class="header-action" mat-mini-fab (click)="logOut()">
         <mat-icon>logout</mat-icon>
       </button>
-      }
+      } -->
     </mat-toolbar>
   </div>
 

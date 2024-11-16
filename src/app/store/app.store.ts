@@ -19,24 +19,23 @@ import { AppService } from '../services/app.service';
 import { switchScan } from 'rxjs';
 
 type State = {
-  initialized: boolean;
+  booted: boolean;
   books: Book[];
   subjects: Subject[];
-  subjectFilter: string;
   topics: Topic[];
-  user: LoggedUser | null;
+  subjectFilter: string;
+  // user: LoggedUser | null;
   loading: boolean;
-  loggedIn: boolean;
+  // loggedIn: boolean;
 };
 const initialState: State = {
   subjectFilter: '',
   loading: false,
-  initialized: false,
+  booted: false,
   books: [],
   subjects: [],
   topics: [],
-  user: null,
-  loggedIn: false,
+  // user: null,
 };
 export const APP_STATE = signalStore(
   { providedIn: 'root' },
@@ -70,68 +69,17 @@ export const APP_STATE = signalStore(
       store,
       bookService = inject(BookService),
       subjectService = inject(SubjectService),
-      topicService = inject(TopicService),
-      userService = inject(UserService)
+      topicService = inject(TopicService)
     ) => ({
-      setState(state: boolean) {
-        patchState(store, { initialized: state });
+      toggleLoadState() {
+        patchState(store, ({ loading }) => ({ loading: !loading }));
       },
-      setLoadState(v: boolean) {
-        patchState(store, { loading: v });
-      },
-      isLoggedIn() {
-        return !!userService.isLoggedIn();
-      },
-      setUserSession() {
-        userService.setUserSession(store.user());
-      },
+
       setSubjectFilter(subject: string) {
         patchState(store, { subjectFilter: subject });
       },
-      async login(payload: Partial<User>) {
-        patchState(store, { loading: true });
-        const response = await userService.login(payload);
 
-        if (response.status) {
-          patchState(store, (state) => ({
-            user: response.data as LoggedUser,
-            loading: false,
-            loggedIn: true,
-          }));
-          userService.setUserSession(response.data);
-          return true;
-        }
-        return false;
-      },
-      logOut() {
-        patchState(store, { loggedIn: false, user: null });
-        userService.logOut();
-      },
-      async initializeData() {
-        const loggedIn = !!userService.isLoggedIn();
-        patchState(store, { loading: true, initialized: true });
-        const [books, topics, subjects] = await Promise.all([
-          bookService.getBooks(),
-          topicService.getTopics(),
-          subjectService.getSubjects(),
-        ]);
-
-        patchState(store, (state) => ({
-          books: books,
-          topics: topics,
-          subjects: subjects,
-          loading: false,
-        }));
-        if (loggedIn) {
-          patchState(store, {
-            loggedIn,
-            user: JSON.parse(userService.isLoggedIn() as string),
-          });
-        } else {
-          patchState(store, { loggedIn });
-        }
-      },
-      async getResources() {
+      async configApp() {
         patchState(store, { loading: true });
         const [books, topics, subjects] = await Promise.all([
           bookService.getBooks(),

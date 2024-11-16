@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
   const questions = await Model.find();
   res.send(questions);
 });
-router.get('/:id', async (req, res) => {
+router.get('/result/:id', async (req, res) => {
   // get just one item
   const id = req.params.id;
   const exam = await Model.findOne({ _id: id });

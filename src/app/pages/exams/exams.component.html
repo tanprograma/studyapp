@@ -4,6 +4,9 @@
     [items]="store.exams().length"
     (onClick)="getExamPreview()"
   ></reloader>
+  @if (store.loading()) {
+  <load-indicator [message]="'processing request'"></load-indicator>
+  }@else {
   <div class="exams">
     @for (exam of store.exams(); track $index) {
     <div class="exam">
@@ -25,4 +28,5 @@
     </div>
     }
   </div>
+  }
 </div>

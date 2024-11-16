@@ -51,7 +51,7 @@ export class CreateArticleComponent {
   }
   prepareArticle(): Pick<Article, 'author' | 'content' | 'title'> {
     return {
-      author: `${this.userStore.user()?._id}`,
+      author: ``,
       content: this.form.value.article ?? '',
       title: {
         main: this.form.value.main ?? '',

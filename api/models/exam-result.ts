@@ -3,7 +3,7 @@ import { Exam, ExamResult } from '../../src/app/interfaces/exam';
 
 const schema = new Schema<ExamResult>(
   {
-    user: String,
+    // user: String,
     book: String,
     topic: String,
     subject: String,

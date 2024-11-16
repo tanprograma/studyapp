@@ -3,7 +3,7 @@ import { Project } from '../../src/app/interfaces/project';
 
 const schema = new Schema<Project>(
   {
-    author: String,
+    // author: String,
     title: { type: String, lowercase: true },
     completed: { type: Boolean, default: () => false },
   },

@@ -74,7 +74,7 @@ export class CreateNotesComponent {
       subject: this.form.value.subject ?? '',
       title: note.item ?? '',
       topic: this.form.value.topic ?? '',
-      author: this.appStore.user()?._id as string,
+      // author: '',
     }));
   }
   clearForm() {

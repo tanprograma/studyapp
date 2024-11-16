@@ -33,14 +33,10 @@ export const NOTE_STORE = signalStore(
         patchState(store, { initialized: true });
       },
 
-      async getNotes(topic: { topic: string }) {
-        appStore.setLoadState(true);
-        const notes = await noteService.getNotes(
-          appStore.user()?._id as string,
-          topic
-        );
-        patchState(store, { notes: notes });
-        appStore.setLoadState(false);
+      async getNotes(query: { topic: string }) {
+        patchState(store, { loading: true });
+        const notes = await noteService.getNotes(query);
+        patchState(store, { notes: notes, loading: false });
       },
       async addNote(payload: Partial<Note>[]) {
         patchState(store, { loading: true });

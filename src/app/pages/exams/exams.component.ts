@@ -5,11 +5,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { EXAM_STORE } from '../../store/exam.store';
 import { ReloaderComponent } from '../../components/reloader/reloader.component';
 import { APP_STATE } from '../../store/app.store';
+import { LoadIndicatorComponent } from '../../components/load-indicator/load-indicator.component';
 
 @Component({
   selector: 'exams',
   standalone: true,
-  imports: [RouterLink, MatButtonModule, ReloaderComponent],
+  imports: [
+    RouterLink,
+    MatButtonModule,
+    ReloaderComponent,
+    LoadIndicatorComponent,
+  ],
   templateUrl: './exams.component.html',
   styleUrl: './exams.component.scss',
 })
@@ -17,15 +23,10 @@ export class ExamsComponent implements OnInit {
   store = inject(EXAM_STORE);
   appStore = inject(APP_STATE);
   ngOnInit(): void {
-    if (!this.store.initialized()) {
-      this.store.initializeStore();
-      this.getExamPreview().then((res) => console.log('fetched Exams'));
-    }
+    this.getExamPreview().then((res) => console.log('fetched Exams'));
   }
 
   async getExamPreview() {
-    this.appStore.setLoadState(true);
     await this.store.getExamPreviews();
-    this.appStore.setLoadState(false);
   }
 }

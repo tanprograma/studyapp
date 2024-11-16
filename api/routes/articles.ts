@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
   const articles = await ArticleModel.find();
   res.send(articles);
 });
-router.get('/:id', async (req, res) => {
+router.get('/article/:id', async (req, res) => {
   // get specific or one article
   const id = req.params.id;
   const article = await ArticleModel.findOne({ _id: id });

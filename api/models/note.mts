@@ -3,7 +3,7 @@ import { Note } from "../../src/app/interfaces/note";
 
 const schema = new Schema<Note>(
   {
-    author: String,
+    // author: String,
     book: String,
     topic: String,
     title: String,

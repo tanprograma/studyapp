@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 import { Plan } from '../../src/app/interfaces/plan';
 const schema = new Schema<Plan>(
   {
-    author: String,
+    // author: String,
     title: { type: String, lowercase: true },
     completed: { type: Boolean, default: () => false },
   },

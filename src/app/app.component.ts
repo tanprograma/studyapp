@@ -63,25 +63,10 @@ export class AppComponent implements OnInit {
     { name: 'admin', url: 'admin' },
   ];
   title = 'KISOMO';
-  constructor() {
-    effect(() => {
-      if (!this.appState.isLoggedIn()) {
-        this.router.navigate(['/login']);
-      }
-    });
-  }
+  constructor() {}
   ngOnInit(): void {
-    // this.appState.setUserSession();
-    if (this.appState.isLoggedIn()) {
-      this.appState.initializeData().then((res) => {
-        console.log('initialization in the main app....');
-      });
-    }
+    this.appState.configApp().then((res) => console.log('app configured'));
   }
-  async reloadData() {
-    await this.appState.getResources();
-  }
-  logOut() {
-    this.appState.logOut();
-  }
+
+  logOut() {}
 }

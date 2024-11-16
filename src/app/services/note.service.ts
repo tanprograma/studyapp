@@ -9,8 +9,8 @@ import { NotesFilter } from '../store/note.store';
 export class NoteService {
   private $axios = inject(UrlService).$axios;
   constructor() {}
-  async getNotes(author: string, { topic }: { topic: string }) {
-    const res = await this.$axios.get(`/notes?author=${author}&topic=${topic}`);
+  async getNotes({ topic }: { topic: string }) {
+    const res = await this.$axios.get(`/notes?topic=${topic}`);
     return res.data;
   }
   async addNote(note: Partial<Note>[]): Promise<Note[]> {

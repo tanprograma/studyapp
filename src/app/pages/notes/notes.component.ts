@@ -8,6 +8,7 @@ import { APP_STATE } from '../../store/app.store';
 import { Note } from '../../interfaces/note';
 import { NOTE_STORE } from '../../store/note.store';
 import { MatIconModule } from '@angular/material/icon';
+import { LoadIndicatorComponent } from '../../components/load-indicator/load-indicator.component';
 
 @Component({
   selector: 'app-notes',
@@ -19,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     MatSelectModule,
     MatIconModule,
+    LoadIndicatorComponent,
   ],
   templateUrl: './notes.component.html',
   styleUrl: './notes.component.scss',
@@ -33,7 +35,7 @@ export class NotesComponent {
     topic: ['', Validators.required],
   });
   setSubject(v: string) {
-    this.subject.set(v);
+    this.appState.setSubjectFilter(v);
   }
   async getNotes() {
     await this.store.getNotes({ topic: this.form.value.topic ?? '' });

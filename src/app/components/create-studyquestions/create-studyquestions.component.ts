@@ -61,13 +61,13 @@ export class CreateStudyquestionsComponent {
     this.questions = [];
   }
   prepareQuestions(): Partial<StudyQuestion>[] {
-    const author = this.appStore.user()?._id ?? '';
-    console.log(author);
+    // const author = this.appStore.user()?._id ?? '';
+
     return this.questions.map((qn) => ({
       subject: this.form.value.subject ?? '',
       title: qn.item ?? '',
       topic: this.form.value.topic ?? '',
-      author: author,
+      // author: author,
     }));
   }
   clearForm() {

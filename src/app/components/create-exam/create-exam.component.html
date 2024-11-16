@@ -1,76 +1,95 @@
 <div class="content">
   <h1>EXAM-TEST YOURSELF</h1>
-  @if (!!store.selectedExam().questions.length && !markView) {
-  <div class="subject-form">
-    <div class="item">
-      <span>questions</span>
-      <span>{{ store.selectedExam().questions.length }}</span>
-    </div>
-    <div class="item">
-      <span>topic</span>
-      <span>{{ store.selectedExam().topic }}</span>
-    </div>
-    <div class="item">
-      <span>book</span>
-      <span>{{ store.selectedExam().book }} </span>
-    </div>
-  </div>
-  @if(!!store.selectedExam().questions){
-  <div class="created">
-    <div class="questions">
-      @for (question of store.selectedExam().questions; track $index) {
+  <mat-tab-group>
+    <mat-tab label="take exam">
+      <div class="subject-form">
+        <div class="item">
+          <span>questions</span>
+          <span>{{ store.selectedExam().questions.length }}</span>
+        </div>
+        <div class="item">
+          <span>topic</span>
+          <span>{{ store.selectedExam().topic }}</span>
+        </div>
+        <div class="item">
+          <span>book</span>
+          <span>{{ store.selectedExam().book }} </span>
+        </div>
+      </div>
+      @if(store.loading()){
+      <load-indicator [message]="'processing request'"></load-indicator>
+      }@else {
 
-      <question-take
-        [item]="question"
-        (onSelectOption)="selectChoice($event)"
-      />
+      <div class="created">
+        <div class="questions">
+          @for (question of store.selectedExam().questions; track $index) {
 
+          <question-take
+            [item]="question"
+            (onSelectOption)="selectChoice($event)"
+          />
+
+          }
+        </div>
+      </div>
       }
-    </div>
-  </div>
-  } @if (markView && !!store.selectedExam().questions.length) {
+      <div class="action">
+        <button
+          class="action-btn"
+          mat-flat-button
+          [disabled]="markView"
+          (click)="mark()"
+          [disabled]="complete"
+        >
+          MARK
+        </button>
+      </div>
+    </mat-tab>
+    @if(complete){
+    <mat-tab label="results">
+      <div class="subject-form results">
+        <div class="item">
+          <span>questions</span>
+          <span>{{ store.selectedExam().questions.length }}</span>
+        </div>
+        <div class="item">
+          <span>score</span>
+          <span>{{ store.score() }}({{ store.scorePercentage() }})</span>
+        </div>
+        <div class="item">
+          <span>book</span>
+          <span>{{ store.selectedExam().book }}</span>
+        </div>
+      </div>
+      <div class="created">
+        <div class="questions">
+          @for (question of store.selectedExam().questions; track $index) {
 
-  <div class="created">
-    <div class="questions">
-      @for (question of store.selectedExam().questions; track $index) {
+          <question-mark [item]="question" />
 
-      <question-mark [item]="question" />
+          }
+        </div>
+      </div>
 
-      }
-    </div>
-  </div>
-  <div class="subject-form results">
-    <div class="item">
-      <span>questions</span>
-      <span>{{ store.selectedExam().questions.length }}</span>
-    </div>
-    <div class="item">
-      <span>score</span>
-      <span>{{ store.score() }}({{ store.scorePercentage() }})</span>
-    </div>
-    <div class="item">
-      <span>book</span>
-      <span>{{ store.selectedExam().book }}</span>
-    </div>
-  </div>
-  }
-  <div class="action">
-    <button
-      class="action-btn"
-      mat-flat-button
-      [disabled]="markView"
-      (click)="mark()"
-    >
-      MARK
-    </button>
-    <a
-      class="action-btn"
-      mat-flat-button
-      [disabled]="!markView"
-      routerLink="/exams"
-    >
-      GO TO EXAMS
-    </a>
-  </div>
-  }
+      <div class="action">
+        <button
+          class="action-btn"
+          mat-flat-button
+          [disabled]="markView"
+          (click)="saveExam()"
+        >
+          SAVE
+        </button>
+        <a
+          class="action-btn"
+          mat-flat-button
+          [disabled]="!markView"
+          routerLink="/exams"
+        >
+          GO TO EXAMS
+        </a>
+      </div>
+    </mat-tab>
+    }
+  </mat-tab-group>
 </div>

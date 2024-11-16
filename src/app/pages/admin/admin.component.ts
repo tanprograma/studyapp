@@ -59,16 +59,18 @@ export class AdminComponent implements OnInit {
   constructor() {}
   ngOnInit(): void {
     // console.log(this.appStore.isLoggedIn());
-    this.bootComponent()
-      .then(() => console.log('component booted'))
-      .catch((err) => console.error(err.message));
+    if (!this.appStore.booted()) {
+      this.bootComponent()
+        .then(() => console.log('component booted'))
+        .catch((err) => console.error(err.message));
+    }
   }
   async bootComponent() {
-    if (isPlatformBrowser(this.appID) && !this.appStore.initialized()) {
-      this.appStore.setState(true);
-      this.appStore.setLoadState(true);
-      await this.appStore.initializeData();
-      this.appStore.setLoadState(false);
-    }
+    // if (isPlatformBrowser(this.appID) && !this.appStore.initialized()) {
+    //   this.appStore.setState(true);
+    //   this.appStore.setLoadState(true);
+    //   await this.appStore.initializeData();
+    //   this.appStore.setLoadState(false);
+    // }
   }
 }

@@ -5,7 +5,7 @@ const schema = new Schema<Article>(
   {
     title: { main: String, sub: String },
     content: String,
-    author: String,
+    // author: String,
   },
   { timestamps: true }
 );

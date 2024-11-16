@@ -2,7 +2,7 @@ import { Component, effect, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { USER_STATE } from '../../store/user.store';
+// import { USER_STATE } from '../../store/user.store';
 import { User } from '../../interfaces/user';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -29,28 +29,28 @@ import { APP_STATE } from '../../store/app.store';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  appStore = inject(APP_STATE);
-  router = inject(Router);
-  formBuilder = inject(FormBuilder);
-  form = this.formBuilder.group({
-    username: ['', Validators.required],
-    password: ['', Validators.required],
-  });
-  async login() {
-    const status = await this.appStore.login(this.prepareUser());
-    if (status) {
-      this.router.navigate(['/boot']);
-    }
-  }
-  prepareUser(): Partial<User> {
-    return {
-      username: this.form.value.username ?? '',
-      password: this.form.value.password ?? '',
-    };
-  }
-  showPassword: boolean = false;
-  toggleVisibility(e: MouseEvent) {
-    e.stopPropagation();
-    this.showPassword = !this.showPassword;
-  }
+  // appStore = inject(APP_STATE);
+  // router = inject(Router);
+  // formBuilder = inject(FormBuilder);
+  // form = this.formBuilder.group({
+  //   username: ['', Validators.required],
+  //   password: ['', Validators.required],
+  // });
+  // async login() {
+  //   const status = await this.appStore.login(this.prepareUser());
+  //   if (status) {
+  //     this.router.navigate(['/boot']);
+  //   }
+  // }
+  // prepareUser(): Partial<User> {
+  //   return {
+  //     username: this.form.value.username ?? '',
+  //     password: this.form.value.password ?? '',
+  //   };
+  // }
+  // showPassword: boolean = false;
+  // toggleVisibility(e: MouseEvent) {
+  //   e.stopPropagation();
+  //   this.showPassword = !this.showPassword;
+  // }
 }

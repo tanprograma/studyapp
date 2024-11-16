@@ -28,7 +28,11 @@ export class TodoService {
     return req.data;
   }
   async updateTodo(id: string, payload: Partial<Todo>) {
-    const req = await this.$axios.patch('/todos/id', payload);
+    const req = await this.$axios.put('/todos/id', payload);
+    return req.data;
+  }
+  async toggleTodo(id: string) {
+    const req = await this.$axios.patch(`/todos/${id}`, {});
     return req.data;
   }
 }
