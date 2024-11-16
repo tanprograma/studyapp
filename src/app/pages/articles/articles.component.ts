@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  ViewEncapsulation,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { ARTICLE_STORE } from '../../store/article.store';
@@ -21,6 +26,7 @@ import { LoadIndicatorComponent } from '../../components/load-indicator/load-ind
   templateUrl: './articles.component.html',
   styleUrl: './articles.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class ArticlesComponent {
   store = inject(ARTICLE_STORE);

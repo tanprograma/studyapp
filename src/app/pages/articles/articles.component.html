@@ -11,7 +11,7 @@
 
       <a class="exam" [routerLink]="['/articles', article._id]">
         <span class="flex-10 date">{{ article.createdAt }}</span>
-        <span>{{ article.title.main }}</span>
+        <span [innerHTML]="article.title.main"></span>
       </a>
 
       }
