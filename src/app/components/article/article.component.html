@@ -1,8 +1,8 @@
 @if (!!article) {
 <div class="heading">
-  <h1 [innerHTML]="article.title.main"></h1>
+  <h1 [innerHTML]="article.title.main" class="h-1"></h1>
   @if(article.title.sub){
-  <h2 [innerHTML]="article.title.sub"></h2>
+  <h2 [innerHTML]="article.title.sub" class="h-2"></h2>
   }
 </div>
 <div class="article" [innerHTML]="article.content"></div>

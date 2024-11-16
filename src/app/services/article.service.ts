@@ -16,7 +16,7 @@ export class ArticleService {
     return res.data;
   }
   async getArticle(id: string): Promise<Article> {
-    const res = await this.$axios.get(`/articles/${id}`);
+    const res = await this.$axios.get(`/articles/article/${id}`);
     return res.data;
   }
   async getLatestArticle() {
