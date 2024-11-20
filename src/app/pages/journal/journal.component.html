@@ -1,0 +1,18 @@
+<div class="content">
+  <h1>JOURNAL ENTRIES</h1>
+
+  <div class="notes">
+    @if(store.loading()){
+    <load-indicator [message]="'processing request'"></load-indicator>
+    }@else { @for (item of store.journal(); track $index) {
+    <div class="note">
+      <span class="date">
+        {{ renderDate(item.createdAt) }}
+      </span>
+      <span class="title">
+        {{ item.title }}
+      </span>
+    </div>
+    } }
+  </div>
+</div>

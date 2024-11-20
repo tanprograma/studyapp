@@ -21,6 +21,7 @@ import results from './api/routes/exam-results';
 import books from './api/routes/books';
 import projects from './api/routes/projects';
 import studyqns from './api/routes/studyqns';
+import journals from './api/routes/journal';
 
 dotenv.config();
 
@@ -62,6 +63,7 @@ export function app(): express.Express {
   server.use('/api/articles', articles);
   server.use('/api/topics', topics);
   server.use('/api/subjects', subjects);
+  server.use('/api/journal', journals);
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
 

@@ -1,0 +1,30 @@
+.content {
+  height: 100%;
+  position: relative;
+  overflow-y: scroll;
+}
+h1 {
+  background-color: black;
+  color: white;
+  position: sticky;
+  top: 0;
+  text-align: center;
+}
+.note {
+  width: 80%;
+  display: flex;
+  margin: 5px auto;
+  border-bottom: 1px solid black;
+}
+span {
+  padding-top: 5px;
+}
+.date {
+  flex: 0 0 23%;
+  background-color: rgb(55, 53, 53);
+  color: rgb(160, 160, 178);
+  padding-left: 2px;
+}
+.title {
+  padding-left: 15px;
+}

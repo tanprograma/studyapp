@@ -43,6 +43,16 @@ export const TODO_STORE = signalStore(
           throw new Error('unknown filter');
       }
     }),
+    createdItems: computed(() => {
+      return todos()
+        .filter((item) => {
+          return (
+            new Date(item.createdAt).toLocaleDateString() ==
+            new Date().toLocaleDateString()
+          );
+        })
+        .map((item) => ({ _id: item._id, item: item.title }));
+    }),
   })),
   withMethods(
     (

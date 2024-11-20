@@ -28,6 +28,7 @@ import { APP_STATE } from '../../store/app.store';
 import { isPlatformBrowser, JsonPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { CreateStudyquestionsComponent } from '../../components/create-studyquestions/create-studyquestions.component';
+import { CreateJournalComponent } from '../../components/create-journal/create-journal.component';
 
 @Component({
   selector: 'app-admin',
@@ -47,6 +48,7 @@ import { CreateStudyquestionsComponent } from '../../components/create-studyques
     MatProgressSpinnerModule,
     JsonPipe,
     CreateStudyquestionsComponent,
+    CreateJournalComponent,
   ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',

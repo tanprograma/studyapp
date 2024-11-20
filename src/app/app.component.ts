@@ -51,6 +51,7 @@ export class AppComponent implements OnInit {
   router = inject(Router);
   links: Link[] = [
     { name: 'todos', url: 'todos' },
+    { name: 'journal', url: 'journal' },
     { name: 'plans', url: 'plans' },
     { name: 'projects', url: 'projects' },
 

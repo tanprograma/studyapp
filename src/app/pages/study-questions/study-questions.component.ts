@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { STUDY_STORE } from '../../store/studqn.store';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,6 +31,7 @@ export class StudyQuestionsComponent {
   form = this.formBuilder.group({
     topic: ['', Validators.required],
   });
+  ngOnInit(): void {}
   setSubject(v: string) {
     this.appState.setSubjectFilter(v);
   }

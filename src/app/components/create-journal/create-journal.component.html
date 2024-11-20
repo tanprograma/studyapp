@@ -1,0 +1,32 @@
+@if (store.loading()) {
+<div class="content">
+  <load-indicator [message]="'processing request'"></load-indicator>
+</div>
+}@else {
+<div class="content">
+  <form class="subject-form" [formGroup]="form" (ngSubmit)="addEntry()">
+    <div class="flexed">
+      <mat-form-field class="control-full">
+        <mat-label>write entry and press enter</mat-label>
+        <textarea matInput formControlName="entry"> </textarea>
+      </mat-form-field>
+    </div>
+    <button class="save-btn" mat-flat-button>save journal entry</button>
+  </form>
+  <div class="created">
+    <created
+      [items]="store.createdEntries()"
+      (onDelete)="removeEntry($event)"
+    ></created>
+  </div>
+  <!-- <div class="flexed">
+    <button
+      mat-flat-button
+      (click)="addStudyQn()"
+      [disabled]="questions.length == 0"
+    >
+      save journal entry
+    </button>
+  </div> -->
+</div>
+}

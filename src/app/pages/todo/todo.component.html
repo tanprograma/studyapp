@@ -1,10 +1,12 @@
 <div class="content">
   <h1>TODO'S</h1>
-  <mat-button-toggle-group #filter>
-    <mat-button-toggle value="all">all</mat-button-toggle>
-    <mat-button-toggle value="pending">pending</mat-button-toggle>
-    <mat-button-toggle value="completed">completed</mat-button-toggle>
-  </mat-button-toggle-group>
+  <div class="toggle">
+    <mat-button-toggle-group #filter (change)="onFilterTodo($event)">
+      <mat-button-toggle value="all">all</mat-button-toggle>
+      <mat-button-toggle value="pending">pending</mat-button-toggle>
+      <mat-button-toggle value="completed">completed</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
   @if (!store.loading()) {
 
   <todo-list [items]="store.filteredTodos()" (onUpdate)="updateList($event)" />

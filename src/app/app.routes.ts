@@ -14,6 +14,7 @@ import { ArticlesViewComponent } from './components/articles-view/articles-view.
 import { BootComponent } from './components/boot/boot.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { StudyQuestionsComponent } from './pages/study-questions/study-questions.component';
+import { JournalComponent } from './pages/journal/journal.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/admin', pathMatch: 'full' },
@@ -26,6 +27,7 @@ export const routes: Routes = [
   { path: 'projects', component: ProjectsComponent },
   { path: 'plans', component: PlansComponent },
   { path: 'admin', component: AdminComponent },
+  { path: 'journal', component: JournalComponent },
   { path: 'articles', component: ArticlesComponent },
   { path: 'articles/:id', component: ArticlesViewComponent },
 

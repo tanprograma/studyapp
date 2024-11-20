@@ -87,20 +87,4 @@ export class TodoComponent implements OnInit {
 
     this.store.filterTodos(value);
   }
-  // async onDeleteTodo(event: MouseEvent, id?: string) {
-  //   event.stopPropagation();
-  //   await this.store.deleteTodo(id);
-  // }
-
-  // async updateTodo(completed: boolean, id: string) {
-
-  //   // console.log({ completed, id });
-  //   // console.log(this.store.todos());
-  //   await this.store.updateTodo(completed, id);
-  // }
-  // async updateTodo(id: string) {
-  //   console.log(id);
-
-  //   await this.store.updateTodo(id);
-  // }
 }
