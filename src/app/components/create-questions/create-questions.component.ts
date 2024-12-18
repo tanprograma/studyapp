@@ -63,7 +63,7 @@ export class CreateQuestionsComponent {
       .find((b) => b.name == bookName) as Book;
     if (book) {
       for (let i = 1; i <= book.chapters; i++) {
-        this.chapters.push(`chapter ${i}`);
+        this.chapters.push(`${i}`);
       }
     }
   }
