@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { LoadIndicatorComponent } from '../load-indicator/load-indicator.component';
 import { APP_STATE } from '../../store/app.store';
+import { Book } from '../../interfaces/book';
 
 @Component({
   selector: 'create-questions',
@@ -41,7 +42,7 @@ export class CreateQuestionsComponent {
   appStore = inject(APP_STATE);
   store = inject(EXAM_STORE);
   questions: Choice[] = [];
-
+  chapters: string[] = [];
   createQuestions() {
     const qns = this.form.value.choices ?? 0;
     for (let i = 1; i <= qns; i++) {
@@ -55,6 +56,16 @@ export class CreateQuestionsComponent {
     // } else {
     //   return;
     // }
+  }
+  setChapters(bookName: string) {
+    const book: Book = this.appStore
+      .filteredBooks()
+      .find((b) => b.name == bookName) as Book;
+    if (book) {
+      for (let i = 1; i <= book.chapters; i++) {
+        this.chapters.push(`chapter ${i}`);
+      }
+    }
   }
   selectChoice(choice: Partial<Result>) {
     this.questions = this.questions.map((qn) => {

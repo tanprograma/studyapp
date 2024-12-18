@@ -33,6 +33,7 @@ export class CreateBooksComponent {
   form = this.formBuilder.group({
     subject: ['', Validators.required],
     book: ['', Validators.required],
+    chapters: [0, Validators.required],
   });
   appStore = inject(APP_STATE);
   store = inject(BOOK_STORE);
@@ -42,6 +43,7 @@ export class CreateBooksComponent {
       await this.store.addBook({
         name: this.form.value.book ?? '',
         subject: this.form.value.subject ?? '',
+        chapters: this.form.value.chapters ?? 0,
       });
       this.clearForm();
     } else {
@@ -49,7 +51,7 @@ export class CreateBooksComponent {
     }
   }
   clearForm() {
-    this.form.patchValue({ book: '' });
+    this.form.patchValue({ book: '', chapters: 0 });
   }
   async deleteItem(id: string) {
     await this.store.deleteBook(id);
