@@ -32,10 +32,15 @@
   <div class="notes">
     @if(store.loading()){
     <load-indicator [message]="'processing request'"></load-indicator>
-    }@else { @for (item of store.notes(); track $index) {
-    <div class="note">
-      {{ item.title }}
-    </div>
-    } }
+    }@else {
+
+    <ul>
+      @for (item of store.notes(); track $index) {
+      <li class="note">
+        {{ item.title }}
+      </li>
+      }
+    </ul>
+    }
   </div>
 </div>

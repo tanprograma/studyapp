@@ -20,7 +20,7 @@ import { LoadIndicatorComponent } from '../load-indicator/load-indicator.compone
     MatInputModule,
     ReactiveFormsModule,
     CreatedComponent,
-    QuestionsListComponent,
+
     MatButtonModule,
     MatIconModule,
     MatSelectModule,
@@ -31,18 +31,7 @@ import { LoadIndicatorComponent } from '../load-indicator/load-indicator.compone
 })
 export class CreateNotesComponent {
   formBuilder = inject(FormBuilder);
-  subject = signal('');
-  topics = computed(() => {
-    switch (this.subject()) {
-      case '':
-        return [];
 
-      default:
-        return this.appStore
-          .topics()
-          .filter((topic) => topic.subject == this.subject());
-    }
-  });
   form = this.formBuilder.group({
     subject: ['', Validators.required],
     note: ['', Validators.required],
@@ -51,8 +40,9 @@ export class CreateNotesComponent {
   appStore = inject(APP_STATE);
   store = inject(NOTE_STORE);
   notes: { item: string; _id: string }[] = [];
+
   setSubject(v: string) {
-    this.subject.set(v);
+    this.appStore.setSubjectFilter(v);
   }
   removeNote(id: string) {
     this.notes = this.notes.filter((note) => note._id != id);

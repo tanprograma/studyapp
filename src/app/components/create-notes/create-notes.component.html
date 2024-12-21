@@ -6,6 +6,10 @@
 <div class="content">
   <form class="subject-form" [formGroup]="form" (ngSubmit)="createNote()">
     <div class="flexed">
+      <mat-form-field class="control-full">
+        <mat-label>study question</mat-label>
+        <textarea matInput formControlName="note"> </textarea>
+      </mat-form-field>
       <mat-form-field class="control">
         <mat-label>subject</mat-label>
         <mat-select
