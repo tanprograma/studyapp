@@ -21,7 +21,11 @@
 
       <mat-form-field class="control">
         <mat-label>topic</mat-label>
-        <input matInput type="number" formControlName="topic" />
+        <mat-select matInput formControlName="topic">
+          @for (item of appStore.filteredTopics(); track $index) {
+          <mat-option [value]="item.name">{{ item.name }}</mat-option>
+          }
+        </mat-select>
       </mat-form-field>
 
       <button type="submit" mat-fab>
